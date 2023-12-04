@@ -43,31 +43,37 @@
 </head>
 
 <body>
-    
+    <!-- onchange 걸어서 입력하는 값에 맞지 않으면 표시하는 함수 만들기 -->
     <h1 id="mainFont">회원가입</h1>
     <form action="makeAccountAction.jsp" >
         <div id="loginBox">
             <div class="insertBox">
                 <span id="nameFont" class="fontSize">이름 : </span>
-                <input id="nameBox" placeholder="필수 입력 사항입니다." name="name" type="text" length="14" maxlength="12">
+                <input id="nameBox" placeholder="필수 입력 사항입니다." name="name" type="text" length="14" maxlength="12" onchange="checkNameEvent()">
+                <div id = "nameInputMessage"></div>
             </div>
             <div class="insertBox" id="idAppendBox">
                 <span id="idFont" class="fontSize">아이디 : </span>
-                <input id="idBox" placeholder="4~10자리 사이" name="id" type="text" length="18" maxlength="16">
+                <input id="idBox" placeholder="4~10자리 사이" name="id" type="text" length="18" maxlength="16" onchange="checkIdEvent()">
                 <button type="button" id="checkButton" onclick="checkIdDuplicate()">중복확인</button>
-                <input type="hidden" name="idDuplication" value="unchecked">
+                <div id = "idInputMessage"></div>
+                <input type="hidden" id="idDuplicationCheck" name="idDuplication" value="unchecked">
             </div>
             <div class="insertBox">
                 <span class="fontSize">비밀번호 : </span>
-                <input id="pwBox" placeholder="4~16자리 사이" name="pw" type="password" length="18" maxlength="16">
+                <input id="pwBox" placeholder="4~16자리 사이" name="pw" type="password" length="18" maxlength="16" onchange="checkPwMatchEvent()">
+                <div id="passwordMismatch"></div>
             </div>
             <div class="insertBox">
                 <span class="fontSize">재확인 비밀번호 : </span>
-                <input id="comfirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16">
+                <input id="comfirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16" onchange="checkPwMatchEvent()">
+                <div id="confirmPasswordMismatch"></div>
             </div>
             <div class="insertBox">
                 <span class="fontSize">전화번호 : </span>
-                <input id="numBox" placeholder="(-) 없이 입력해주세요." name="tel" type="text" length="18" maxlength="16">
+                <input id="numBox" placeholder="(-) 없이 입력해주세요." name="tel" type="text" length="18" maxlength="16" onchange="checktelEvent()">
+                <div id="telMismatch"></div>
+
             </div>
             <div class="insertBox">
                 <span id="selectTeam" class="fontSize">부서명 : </span>
@@ -93,9 +99,11 @@
     <div id="myModal" class="modal">
         <p id="modalText"></p>
         <button onclick="closeModal()">닫기</button>
-        <button id="useIdButton" onclick="useId()">아이디 사용하기</button>
+        <button id="useIdButton" onclick="useIdEvent()">아이디 사용하기</button>
     </div>
     <script src="../js/makeAccount.js"></script>
+    
 </body>
 
 </html>
+
