@@ -15,17 +15,26 @@
     ResultSet rs= null;
 
     //이미 로그인되어있는경우 처리하기
-    String id = (String)session.getAttribute("id");
-    String name = (String)session.getAttribute("name");
-    if(id != null&& name!=null){
-%>
-    <script>
-        alert("이미 로그인하고 있습니다. \n 일정 페이지로 이동합니다.");
-        location.href = "../mainCalendar.jsp?idValue=" + '<%=id%>' + "&nameValue=" + '<%=name%>';
-    </script>
+    request.setCharacterEncoding("utf-8");
+    String name = (String)session.getAttribute("userName");
+    String id = (String)session.getAttribute("userId");
+    String pw = (String)session.getAttribute("userPw");
+    String role = (String)session.getAttribute("role");
+    String team = (String)session.getAttribute("team");
+    String tel = (String)session.getAttribute("tel");
+    Integer idx = (Integer)session.getAttribute("idx");
 
-<%
-}
+    if (name == null && id == null && pw == null && role == null && team == null && tel == null  && idx != null && idx > 0)
+     {
+        %>
+           <script>
+              alert("이미 로그인하고 있습니다. \n 일정 페이지로 이동합니다.");
+            </script>
+        <%
+        response.sendRedirect(request.getContextPath() + "/jsp/mainCalendar.jsp");
+        
+        }
+        
     Class.forName("com.mysql.jdbc.Driver");
     Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10","Sohyunxxi","1234");
    
@@ -40,24 +49,22 @@
     if(rs.next()){
         String dbId = rs.getString("id");
         String dbpw = rs.getString("pw");
-        int idx = rs.getInt("user_idx");
-        String tel = rs.getString("tel");
-        String team = rs.getString("department");
-        String role = rs.getString("role");
-        String name = rs.getString("name");
+        int dbidx = rs.getInt("user_idx");
+        String dbtel = rs.getString("tel");
+        String dbteam = rs.getString("department");
+        String dbrole = rs.getString("role");
+        String dbname = rs.getString("name");
 
         if(idValue.equals(dbId)&&pwValue.equals(dbpw)){//db상의 아이디 비밀번호와 입력한 값이 둘 다 같은 경우
             //세션에 저장
             session.setAttribute("userId", idValue);
             session.setAttribute("userPw", pwValue);
-            session.setAttribute("idx", idx);
-            session.setAttribute("tel", tel);
-            session.setAttribute("team", team);
-            session.setAttribute("role", role);
-            session.setAttribute("userName", name);
+            session.setAttribute("idx", dbidx);
+            session.setAttribute("tel", dbtel);
+            session.setAttribute("team", dbteam);
+            session.setAttribute("role", dbrole);
+            session.setAttribute("userName", dbname);
             response.sendRedirect("mainCalendar.jsp");
-            response.sendRedirect("mainCalendar.jsp");
-
             
             //date 변수와 Calendar 변수의 차이
             Calendar cal = Calendar.getInstance();
@@ -87,7 +94,7 @@
         %>
     <script>
         alert("사용자가 존재하지 않습니다. 서비스를 이용할려면 회원가입을 해주세요.");
-        location.href = "login.jsp";
+        location.href = "../jsp/login.jsp";
     </script>
 
 <%

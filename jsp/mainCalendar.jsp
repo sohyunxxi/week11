@@ -37,8 +37,7 @@
 
     int showTeamIdx=0;
 
-    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx == null || idx.equals("") || !(idx instanceof Integer) ||
-        year == null || month == null || day == null || !(year instanceof Integer) || !(month instanceof Integer) || !(day instanceof Integer)){
+    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx>0){
             
         response.sendRedirect("login.jsp");
     }
@@ -66,18 +65,19 @@
             }
         }
     
-        if(eventYear==!= null && !eventYear.isEmpty()||eventMonth==!= null && !eventMoneth.isEmpty()||eventDay==!= null && !eventDay.isEmpty()){
+        if(eventYear>0||eventMonth>0||eventDay>0){
             eventYear=year;
             eventMonth=month;
             eventDay=day;
 
             //해당 달에 해당하는 이벤트만 가져오기
-            String eventSql = ""SELECT event_idx, start_time, event_content FROM event WHERE user_idx = ? AND YEAR(start_time) = ? AND MONTH(start_time) = ? " +
+            String eventSql = "SELECT event_idx, start_time, event_content FROM event WHERE user_idx = ? AND YEAR(start_time) = ? AND MONTH(start_time) = ? " +
             "ORDER BY start_time ASC";
 
             PreparedStatement eventQuery = connect.prepareStatement(eventSql);
-            eventQuery.setInt(1, year);
-            eventQuery.setInt(1, month); 
+            eventQuery.setInt(1, idx);
+            eventQuery.setInt(2, year);
+            eventQuery.setInt(3, month); 
     
             ResultSet eventRs = eventQuery.executeQuery();
     
@@ -86,25 +86,24 @@
                 LocalDateTime e_time = eventRs.getObject(2, LocalDateTime.class);
                 
                 // 년, 월, 일 추출
-                int year = e_time.getYear();
-                int month = e_time.getMonthValue();
-                int day = e_time.getDayOfMonth();
+                int listYear = e_time.getYear();
+                int listMonth = e_time.getMonthValue();
+                int listDay = e_time.getDayOfMonth();
             
-                String formattedTimeDay = String.format("%04d-%02d-%02d", year, month, day);
+                String formattedTimeDay = String.format("%04d-%02d-%02d", listYear, listMonth, listDay);
                 String formattedTime = String.format("%02d:%02d", e_time.getHour(), e_time.getMinute());
                 String e_eventContent = eventRs.getString(3);
     
                 eventIdx.add(e_eventIdx);  // event_idx를 ArrayList<Integer>에 저장
                 timeList.add("\"" + formattedTime + "\"");
                 dayList.add("\"" + formattedTimeDay + "\"");
-    
                 eventList.add("\"" + e_eventContent + "\"");
             }
     
         }
         else{
             //해당 달에 해당하는 이벤트만 가져오기
-            String eventSql = ""SELECT event_idx, start_time, event_content FROM event " +
+            String eventSql = "SELECT event_idx, start_time, event_content FROM event " +
             "WHERE user_idx = ? AND YEAR(start_time) = ? AND MONTH(start_time) = ? " +
             "ORDER BY start_time ASC";
             PreparedStatement eventQuery = connect.prepareStatement(eventSql);
@@ -119,9 +118,9 @@
                 LocalDateTime e_time = eventRs.getObject(2, LocalDateTime.class);
                 
                 // 년, 월, 일 추출
-                int year = e_time.getYear();
-                int month = e_time.getMonthValue();
-                int day = e_time.getDayOfMonth();
+                int listYear = e_time.getYear();
+                int listMonth = e_time.getMonthValue();
+                int listDay = e_time.getDayOfMonth();
             
                 String formattedTimeDay = String.format("%04d-%02d-%02d", year, month, day);
                 String formattedTime = String.format("%02d:%02d", e_time.getHour(), e_time.getMinute());
@@ -208,54 +207,7 @@
 
     </main>
 
-    <!-- <div id="modal">
-
-        <div id="innerModal">
-            <span class="close" onclick="closeModalEvent()">&times;</span>
-            <form action="makeEvent.jsp">
-                <h2 id="modalDate" >모달 날짜 나오는곳</h2>
-                <input type="hidden" id="eventDate" name="eventDate" value="날짜">
-            <span id="planCount"></span>
-            <hr>
-            <hr>
-            <div id="planBox">
-              
-            </div>
-            <hr>
-            <h3>일정 추가</h3>
-            <hr>
-           
-                <div id="modalTimeBox">
-                    <span>일정 시간</span>
-                    <div class="modalTime">
-                        <div class="modalButtons">
-                            <button type="button" onclick="timeFront('hour')"><img class="modalButtonPic" src="../image/upButton.png"></button>
-                            <button type="button" onclick="timeBack('hour')"><img class="modalButtonPic" src="../image/downButton.png"></button>
-                        </div>
-                        <span class="modalTimeNum hour">00</span>
-                        <input type="hidden" name="hourHidden" class="modalTimeNum" value="00">
-
-                        <span class="modalTimeNum">시</span>
-                    </div>
-                    <div class="modalTime">
-                        <div class="modalButtons">
-                            <button type="button" onclick="timeFront('minute')"><img class="modalButtonPic" src="../image/upButton.png"></button>
-                            <button type="button" onclick="timeBack('minute')"><img class="modalButtonPic" src="../image/downButton.png"></button>
-                        </div>
-                        <span class="modalTimeNum minute">00</span>
-                        <input type="hidden" name="minuteHidden" class="modalTimeNum" value="00">
-                        <span class="modalTimeNum">분</span>
-                    </div>
-                </div>
-                <div id="planInputBox">
-                    <span>일정 내용</span>
-                    <textarea class="planInput" name="eventContent" placeholder="최대 50자까지 적을 수 있습니다. " cols="55" rows="5" maxlength="50"></textarea>
-                </div>
-                <button class="modalPlanButton">등록</button>
-            </form>
-        </div>
-
-    </div> -->
+   
 
     <div id="blackBox">
 
@@ -344,7 +296,7 @@
     }
 
     function presentMonth() {//백엔드에서 처리하기
-        var month = <%=eventMonth> + 1;
+        var month = <%=eventMonth%>;
 
         // 아래와 같이 수정하여 버튼 객체를 만들어서 전달
         var button = document.querySelector('.monthButton[value="' + month + '"]');
@@ -499,22 +451,71 @@ function updatePlanEvent(event) {
 
 
     function openModalEvent(selectedMonth, day) {
+    var modalDate = selectedMonth + "월 " + day + "일 ";
+    var modalCompareDate = modalDate;
 
-        var modal = document.getElementById('modal');
-        var modalDate = document.getElementById('modalDate');
-        var eventDate = document.getElementById('eventDate');
+    // 새 창 열기
+    var modalWindow = window.open('', '_blank', 'width=600, height=400, resizable=yes');
 
-        // 전달받은 날짜를 모달 내부의 텍스트로 설정
-        eventDate.value = selectedMonth + "월 " + day + "일 ";
-        modalDate.textContent = selectedMonth + "월 " + day + "일 " + "일정";
-        console.log(eventDate.value);
-        modalCompareDate = eventDate.value;
-        console.log(modalCompareDate);
+    // 모달 내용 생성
+    var modalContent = `
+    <div id="modal">
 
+        <div id="innerModal">
+            <span class="close" onclick="closeModalEvent()">&times;</span>
+            <form action="makeEvent.jsp">
+                <h2 id="modalDate" >모달 날짜 나오는곳</h2>
+                <input type="hidden" id="eventDate" name="eventDate" value="날짜">
+            <span id="planCount"></span>
+            <hr>
+            <hr>
+            <div id="planBox">
+              
+            </div>
+            <hr>
+            <h3>일정 추가</h3>
+            <hr>
+           
+                <div id="modalTimeBox">
+                    <span>일정 시간</span>
+                    <div class="modalTime">
+                        <div class="modalButtons">
+                            <button type="button" onclick="timeFront('hour')"><img class="modalButtonPic" src="../image/upButton.png"></button>
+                            <button type="button" onclick="timeBack('hour')"><img class="modalButtonPic" src="../image/downButton.png"></button>
+                        </div>
+                        <span class="modalTimeNum hour">00</span>
+                        <input type="hidden" name="hourHidden" class="modalTimeNum" value="00">
 
-        modal.style.display = 'flex';
-        doAdditionalWork();
-    }
+                        <span class="modalTimeNum">시</span>
+                    </div>
+                    <div class="modalTime">
+                        <div class="modalButtons">
+                            <button type="button" onclick="timeFront('minute')"><img class="modalButtonPic" src="../image/upButton.png"></button>
+                            <button type="button" onclick="timeBack('minute')"><img class="modalButtonPic" src="../image/downButton.png"></button>
+                        </div>
+                        <span class="modalTimeNum minute">00</span>
+                        <input type="hidden" name="minuteHidden" class="modalTimeNum" value="00">
+                        <span class="modalTimeNum">분</span>
+                    </div>
+                </div>
+                <div id="planInputBox">
+                    <span>일정 내용</span>
+                    <textarea class="planInput" name="eventContent" placeholder="최대 50자까지 적을 수 있습니다. " cols="55" rows="5" maxlength="50"></textarea>
+                </div>
+                <button class="modalPlanButton">등록</button>
+            </form>
+        </div>
+
+    </div>
+    </div>
+    `;
+
+    // 모달 내용을 새 창에 삽입
+    modalWindow.document.body.innerHTML = modalContent;
+
+    // 추가적인 작업 수행
+    doAdditionalWork();
+}
 
     function doAdditionalWork() {
         var matchingIndices = [];
