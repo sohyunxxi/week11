@@ -1,3 +1,4 @@
+
 function checkIdDuplicate() {
     var idInput = document.getElementById('idBox');
     var idValue = idInput.value.trim();
@@ -6,7 +7,7 @@ function checkIdDuplicate() {
     if (idValue === '') {
         alert('아이디를 입력하세요.');
     } else if (!idRegex.test(idValue)) {
-        alert('아이디는 영어와 숫자를 포함하여 6자리 이상 12자리 이하로 설정해주세요.');
+        alert('아이디는 영어와 숫자를 포함하여 4자리 이상 12자리 이하로 설정해주세요.');
     } else {
         var xhr = new XMLHttpRequest(); //XMLHttpRequest 객체를 생성, 비동기통신인데 서버랑 클라이언트 간 데이터 교환 담당
         xhr.open('POST', 'checkIdDuplicate.jsp', false); // false로 설정해서 동기적으로 통신
@@ -99,23 +100,43 @@ function searchPw() {
     var name = document.getElementById('nameBox');
     var tel = document.getElementById('pwBox');
 
-    if (idInput.value.trim() === '' || tel.value.trim() === '' || name.value.trim() === '') {
-        alert('아이디와 이름, 전화번호를 제대로 입력해 주세요.');
+    if (idInput.value.trim() === ''){
+        alert('아이디를 입력하세요.');
+        
+    } else if(tel.value.trim() === ''){
+        alert('전화번호를 입력하세요.');
+    }else if(name.value.trim()===''){
+        alert('이름을 입력하세요.');
+    }
+    else if(!(/^[a-zA-Z가-힣]{2,50}$/.test(name.value.trim()))){
+        alert('이름은 한글과 영어로 2자부터 50자 사이로 입력해주세요.');
+       
+    } else if (!(/^[0-9]{11}$/.test(tel.value.trim()))) {
+        alert('전화번호는 숫자로만 11자 입력해주세요.');
+
+    } else if (!((/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/.test(idInput.value.trim())))) {
+        alert('아이디는 영어와 숫자 조합으로 6자리이상 12자리이하로 입력해주세요.');
+        
     } else {
-        alert('비밀번호는 어쩌구 입니다.');
-        location.href = "../jsp/login.jsp";
+        document.forms[0].submit();
     }
 }
 
 function searchId() {
-    var idInput = document.getElementById('idBox');
+    var name = document.getElementById('idBox');
     var tel = document.getElementById('pwBox');
 
-    if (idInput.value.trim() === '' || tel.value.trim() === '') {
+    if (name.value.trim() === '' || tel.value.trim() === '') {
         alert('이름과 전화번호를 입력하세요.');
+        
+    } else if(!(/^[a-zA-Z가-힣]{2,50}$/.test(name.value.trim()))){
+        alert('이름은 한글과 영어로 2자부터 50자 사이로 입력해주세요.');
+       
+    } else if (!(/^[0-9]{11}$/.test(tel.value.trim()))) {
+        alert('전화번호는 숫자로만 11자 입력해주세요..');
+        
     } else {
-        alert('아이디는 어쩌구 입니다.');
-        location.href = "../jsp/login.jsp";
+        document.forms[0].submit();
     }
 }
 
@@ -131,9 +152,10 @@ function checkNoInput() {
     var companyInputs = document.querySelectorAll('input[name="company"]');
     var idDuplicationCheck = document.getElementById('idDuplicationCheck');
 
-    var phoneNumberRegex = /^\d+$/;  // 숫자만 허용하는 정규표현식
+    var phoneNumberRegex = /^[0-9]{11}$/;  // 숫자만 허용하는 정규표현식
     var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;  // 영어와 숫자를 포함하고, 6자리 이상 12자리 이하
-    var nameRegex = /^[a-zA-Z가-힣]*{2,50}$/;
+    var nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
+
 
     
     if (nameInput.value.trim() === '' ||
@@ -185,9 +207,10 @@ function validateRadioSelection(radioInputs) {
 function checkNameEvent(){
     var nameInput = document.getElementById('nameBox'); 
     var name= document.getElementById('nameInputMessage '); 
-    var nameRegex = /^[a-zA-Z가-힣]*{2,35}$/;  
+    var nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
+
     if (!nameRegex.test(nameInput.value.trim())) {
-        name.textContent = '이름은 한글이나 영어로 2자리 이상 35자리 이하로 설정해주세요..';
+        name.textContent = '이름은 한글이나 영어로 2자리 이상 50자리 이하로 설정해주세요..';
     } else {
         name.textContent = '';
     }
