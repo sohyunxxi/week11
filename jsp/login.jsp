@@ -4,7 +4,6 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
-<%@ page import="java.util.Calendar" %>
 
 // 이미 로그인되어있는 경우 추가하기
 // 오늘 날짜 계산해서 저장하고 로그인시 메인페이지에 보내기
@@ -20,13 +19,6 @@
     String tel = (String)session.getAttribute("tel");
     int idx = (Integer)session.getAttribute("idx");
 
-    //date 변수와 Calendar 변수의 차이
-    Calendar cal = Calendar.getInstance();
-
-    // 년, 월, 일을 각각 변수에 저장
-    int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH) + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
-    int day = cal.get(Calendar.DAY_OF_MONTH);
     %>
 //try catch 넣기
 
@@ -82,9 +74,9 @@
     var pwInput = document.getElementById('pwBox');
     var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;  // 영어와 숫자를 포함하고, 6자리 이상 12자리 이하 - 아이디 정규표현식
     var pwRegex = !/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>])\S{6,16}$/;//영어, 숫자, 특수문자 포함하기 6자리 이상 16자리 이하 - 비밀번호 정규표현
-    var year = <%= year %>;
-    var month = <%= month %>;
-    var day = <%= day %>;
+    // var year = <%= year %>;
+    // var month = <%= month %>;
+    // var day = <%= day %>;
     
     if (idRegex.test(pwInput.value.trim())) {
         alert('아이디는 6자리 이상 12자리 이하이며 영어와 숫자를 포함해야 합니다. 다시 입력해 주세요.');
@@ -95,7 +87,9 @@
         pwInput.focus();
     }
     else {
-        location.href="../jsp/loginAction.jsp?year=" + year + "&month=" + month + "&day=" + day;
+        //location.href="../jsp/loginAction.jsp?year=" + year + "&month=" + month + "&day=" + day;
+        location.href="../jsp/loginAction.jsp";
+
     }
 } 
 

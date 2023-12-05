@@ -1,0 +1,1069 @@
+body {
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 95%;
+}
+
+#yearBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #70AD47;
+    padding: 0 0 20px 0;
+    margin: 0;
+}
+
+#year {
+    font-size: 60px;
+}
+
+.yearImage {
+    width: 100%;
+    height: 100%;
+}
+
+.yearButton {
+    background-color: transparent;
+    border: none;
+}
+
+#months {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monthButton {
+    width: 5.5%;
+    height: 100%;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 18.5px;
+    background-color: #70AD47;
+    border-radius: 10px;
+    border: #70AD47 solid 1px;
+    color: #FFFFFF;
+}
+.modalPlanButton {
+    background-color: #70AD47;
+    color: #FFFFFF;
+    border: none;
+    margin: 2px;
+}
+
+#divideLine {
+    width: 95%;
+}
+
+#selected {
+    width: 5.5%;
+    height: 100%;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 18.5px;
+    background-color: #385723;
+    border-radius: 10px;
+    border: #385723 solid 1px;
+    color: #FFFFFF;
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #FFFFFF;
+    /* 네비게이션의 배경색을 설정하세요 */
+    width: 1.5%;
+    height: 100%;
+    z-index: 1;
+}
+
+#navShortMenu {
+    width: 40px;
+    height: 100%;
+    position: fixed;
+    border-left: solid 1px #70AD47;
+}
+
+#blackBox {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+
+}
+
+#hidden {
+    right: -350px;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    transition: .2s;
+    border-width: thin;
+    border-color: #70AD47;
+    z-index: 1;
+}
+
+.lineColor {
+    width: 95%;
+    background-color: #70AD47;
+}
+
+#buttonBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.navButton {
+    width: 120px;
+    height: 45px;
+    background-color: #70AD47;
+    border-color: #70AD47;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    border-radius: 15px;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.menuIcon {
+    width: 40px;
+    height: 40px;
+    padding-top: 27px;
+}
+
+#cancelMenuIcon {
+    width: 40px;
+    height: 40px;
+    padding-top: 27px;
+    margin-right: 75%;
+}
+
+#peopleBox {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    color: #70AD47;
+}
+
+.noColor {
+    text-decoration: none;
+    /* 링크의 밑줄 제거 */
+    color: inherit;
+    /* 링크의 색상 제거 */
+}
+
+.navInfo {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+
+.userInfoFont {
+    font-size: 20px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+}
+
+#teamList {
+    font-size: 17px;
+    color: #70AD47;
+    text-align: start;
+}
+
+#backIcon {
+    width: 60px;
+    height: 60px;
+    margin-top: 30%;
+    margin-left: 70%;
+}
+
+main {
+    width: 100%;
+    height: 80%;
+
+}
+
+#dayBox {
+    width: 100%;
+    height: 100%;
+}
+
+.calendarDay {
+    display: inline-block;
+    width: 13%;
+    height: 100px;
+    border: #E2F0D9 solid 1px;
+    margin: 0.25%;
+    background-color: #E2F0D9;
+    color: #000000;
+    font-size: 22.5px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
+
+#planCount {
+    margin-left: 350px;
+    font-size: 20px;
+}
+
+.countFont {
+    margin-left: 55%;
+    margin-top: 15px;
+    padding: 0;
+    font-size: 25px;
+    color: #385723;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    color: #70AD47;
+
+}
+
+#innerModal {
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    width: 40%;
+    height: 90%;
+    overflow-y: scroll;
+
+}
+
+#modalTimeBox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    margin-left: 30px;
+    margin-bottom: 50px;
+    font-size: 20px;
+
+}
+
+.modalButtonPic {
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+}
+
+.modalTime {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 5px;
+
+}
+
+.modalTimeNum {
+    font-size: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.modalPlan {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modalButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.modalButtonsHidden {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+#planInputBox {
+    /* margin-right: 70px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 20px;
+}
+
+.planInput {
+    margin-left: 40px;
+}
+
+#planBox {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    max-height: 300px; 
+}
+
+.planTime {
+    font-size: 20px;
+}
+
+.planContext {
+    font-size: 20px;
+}
+
+.close {
+    position: absolute;
+    top: 3%;
+    right: 30%;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+/* PC 버전 */
+/* 1200px 이상일 때 적용 */
+@media screen and (min-width: 1200px) {
+    /* 여기에 PC 버전의 스타일을 정의합니다. */
+
+}
+
+/* 태블릿 버전 */
+/* 480px 이상 ~ 1200px 미만일 때 적용 */
+@media screen and (min-width: 480px) and (max-width: 1199px) {
+
+    /* 여기에 태블릿 버전의 스타일을 정의합니다. */
+    body {
+        overflow-x: hidden;
+    }
+
+    #yearBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #70AD47;
+        padding: 0 0 12px 0;
+        margin: 0;
+
+    }
+
+    #year {
+        font-size: 40px;
+    }
+
+    .yearButton {
+        background-color: transparent;
+        border: none;
+        width: 40px;
+        height: 40px;
+    }
+
+    #months {
+        width: 100%;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .monthButton {
+        width: 5.5%;
+        height: 100%;
+        margin-left: 0.5%;
+        margin-right: 0.5%;
+        font-size: 12.5px;
+        background-color: #70AD47;
+        border-radius: 5px;
+        border: #70AD47 solid 1px;
+        color: #FFFFFF;
+    }
+
+    #divideLine {
+        width: 90%;
+    }
+
+    #selected {
+        width: 5.5%;
+        height: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
+        font-size: 14.5px;
+        background-color: #385723;
+        border-radius: 5px;
+        border: #385723 solid 1px;
+        color: #FFFFFF;
+    }
+
+    nav {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        background-color: #FFFFFF;
+        width: 0.5%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    #navShortMenu {
+        width: 20px;
+        height: 100%;
+        position: fixed;
+        border-left: solid 1px #70AD47;
+    }
+
+    #blackBox {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+
+    }
+
+    #hidden {
+        right: -300px;
+        height: 100%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        transition: .2s;
+        border-width: thin;
+        border-color: #70AD47;
+    }
+
+    .lineColor {
+        width: 95%;
+        background-color: #70AD47;
+    }
+
+    #buttonBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .navButton {
+        width: 100px;
+        height: 40px;
+        background-color: #70AD47;
+        border-color: #70AD47;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-radius: 12px;
+        font-size: 15px;
+        color: #FFFFFF;
+    }
+
+    .menuIcon {
+        width: 40px;
+        height: 40px;
+        padding-top: 27px;
+    }
+
+    #cancelMenuIcon {
+        width: 40px;
+        height: 40px;
+        padding-top: 27px;
+        margin-right: 75%;
+    }
+
+    #peopleBox {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        color: #70AD47;
+    }
+
+    .noColor {
+        text-decoration: none;
+        /* 링크의 밑줄 제거 */
+        color: inherit;
+        /* 링크의 색상 제거 */
+    }
+
+    .navInfo {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        font-size: 20px;
+    }
+
+    .userInfoFont {
+        font-size: 20px;
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+    }
+
+    #teamList {
+        font-size: 17px;
+        color: #70AD47;
+        text-align: start;
+    }
+
+    #backIcon {
+        width: 60px;
+        height: 60px;
+        margin-top: 30%;
+        margin-left: 70%;
+    }
+
+    main {
+        width: 100%;
+        height: 80%;
+
+    }
+
+    #dayBox {
+        width: 100%;
+        height: 100%;
+    }
+
+    .calendarDay {
+        display: inline-block;
+        width: 13%;
+        height: 80px;
+        border: #E2F0D9 solid 1px;
+        margin: 0.25%;
+        background-color: #E2F0D9;
+        color: #000000;
+        font-size: 22.5px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    .countFont {
+        margin-left: 60%;
+        margin-top: 15px;
+        padding: 0;
+        font-size: 18px;
+        color: #385723;
+    }
+
+    /* #modalDate{
+        color:#000000;
+    } */
+    #modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        color: #70AD47;
+
+    }
+
+    #planCount {
+        margin-left: 200px;
+        font-size: 18x;
+    }
+
+    #innerModal {
+        padding: 20px;
+        background-color: white;
+        text-align: center;
+        width: 40%;
+        height: 90%;
+        overflow-y:scroll;
+    }
+
+    #modalTimeBox {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        margin-left: 25px;
+        margin-bottom: 50px;
+        font-size: 17px;
+
+    }
+
+    .modalButtonPic {
+        background-color: transparent;
+        width: 20px;
+        height: 20px;
+    }
+
+    .modalPlanButton {
+        background-color: #70AD47;
+        color: #FFFFFF;
+        border: none;
+        margin: 2px;
+    }
+
+    .modalTime {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: 4px;
+
+    }
+
+    .modalTimeNum {
+        font-size: 20px;
+        margin-right: 3.5px;
+        margin-left: 3.5px;
+    }
+
+    .modalPlan {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+    }
+
+    .modalButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 40px;
+    }
+
+    .modalButtonsHidden {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 40px;
+    }
+
+    #planInputBox {
+        /* margin-right: 70px; */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 15px;
+    }
+
+    .planInput {
+        margin-left: 40px;
+    }
+
+    #planBox {
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        
+    }
+
+    .planTime {
+        font-size: 15px;
+    }
+
+    .planContext {
+        font-size: 15px;
+    }
+
+    .close {
+        position: absolute;
+        top: 3%;
+        right: 30%;
+        font-size: 40px;
+        cursor: pointer;
+    }
+}
+
+/* 모바일 버전 */
+/* 320px 이상 ~ 480px 미만일 때 적용 */
+@media screen and (max-width: 479px) {
+
+    /* 여기에 모바일 버전의 스타일을 정의합니다. */
+    header {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    #yearBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #70AD47;
+        padding: 0 0 12px 0;
+        margin: 0;
+
+    }
+
+    #year {
+        font-size: 30px;
+    }
+
+    .yearButton {
+        background-color: transparent;
+        border: none;
+        width: 25px;
+        height: 25px;
+    }
+
+    #months {
+        width: 100%;
+        height: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .monthButton {
+        width: 5.5%;
+        height: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
+        font-size: 14.5px;
+        background-color: #70AD47;
+        border-radius: 5px;
+        border: #70AD47 solid 1px;
+        color: #FFFFFF;
+    }
+
+    #divideLine {
+        width: 90%;
+    }
+
+    #selected {
+        width: 5.5%;
+        height: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
+        font-size: 14.5px;
+        background-color: #385723;
+        border-radius: 5px;
+        border: #385723 solid 1px;
+        color: #FFFFFF;
+    }
+
+    nav {
+        position: absolute;
+        top: 0;
+        right: 7px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        background-color: #FFFFFF;
+        /* 네비게이션의 배경색을 설정하세요 */
+        width: 1.5%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    #navShortMenu {
+        width: 40px;
+        height: 100%;
+        position: fixed;
+        border: none;
+    }
+
+    main {
+        width: 90%;
+    }
+
+    #blackBox {
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+
+    }
+
+    #hidden {
+        right: -300px;
+        height: 100%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        transition: .2s;
+        border-width: thin;
+        border-color: #70AD47;
+    }
+
+    .lineColor {
+        width: 95%;
+        background-color: #70AD47;
+    }
+
+    #buttonBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .navButton {
+        width: 100px;
+        height: 40px;
+        background-color: #70AD47;
+        border-color: #70AD47;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-radius: 12px;
+        font-size: 15px;
+        color: #FFFFFF;
+    }
+
+    .menuIcon {
+        width: 20px;
+        height: 20px;
+    }
+
+    #cancelMenuIcon {
+        width: 40px;
+        height: 40px;
+        padding-top: 27px;
+        margin-right: 75%;
+    }
+
+    #peopleBox {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        color: #70AD47;
+    }
+
+    .noColor {
+        text-decoration: none;
+        /* 링크의 밑줄 제거 */
+        color: inherit;
+        /* 링크의 색상 제거 */
+    }
+
+    .navInfo {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        font-size: 20px;
+    }
+
+    .userInfoFont {
+        font-size: 15px;
+        margin-top: 4.5px;
+        margin-bottom: 4.5px;
+    }
+
+    #teamList {
+        font-size: 13px;
+        color: #70AD47;
+        text-align: start;
+    }
+
+    #backIcon {
+        width: 40px;
+        height: 40px;
+        margin-top: 30%;
+        margin-left: 70%;
+    }
+
+    main {
+        width: 100%;
+        height: 80%;
+
+    }
+
+    #dayBox {
+        width: 100%;
+        height: 100%;
+    }
+
+    .calendarDay {
+        display: inline-block;
+        width: 13%;
+        height: 50px;
+        border: #E2F0D9 solid 1px;
+        margin: 0.25%;
+        background-color: #E2F0D9;
+        color: #000000;
+        font-size: 18.5px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    .countFont {
+        margin-left: 30%;
+        margin-top: 15px;
+        padding: 0;
+        font-size: 15px;
+        color: #385723;
+    }
+
+    #modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: flex-start;
+        align-items: flex-start;
+        color: #70AD47;
+        z-index: 2;
+
+    }
+
+    #planCount {
+        margin-left: 200px;
+        font-size: 18px;
+    }
+
+    #innerModal {
+        padding: 20px;
+        background-color: white;
+        text-align: center;
+        width: 40%;
+        height: 90%;
+        overflow-y: auto;
+        z-index: 2;
+    }
+
+    #modalTimeBox {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        margin-left: 25px;
+        margin-bottom: 50px;
+        font-size: 17px;
+
+    }
+
+    .modalButtonPic {
+        background-color: transparent;
+        width: 20px;
+        height: 20px;
+    }
+
+    .modalTime {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: 4px;
+
+    }
+
+    .modalTimeNum {
+        font-size: 20px;
+        margin-right: 3.5px;
+        margin-left: 3.5px;
+    }
+
+    .modalPlan {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+    }
+
+    .modalButtons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 40px;
+    }
+
+    .modalButtonsHidden {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 40px;
+    }
+
+    #planInputBox {
+        /* margin-right: 70px; */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 15px;
+    }
+
+    .planInput {
+        margin-left: 40px;
+    }
+
+    #planBox {
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .planTime {
+        font-size: 15px;
+    }
+
+    .planContext {
+        font-size: 15px;
+    }
+
+    .close {
+        position: absolute;
+        top: 1%;
+        right: 57%;
+        font-size: 40px;
+        cursor: pointer;
+    }
+}

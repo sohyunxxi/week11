@@ -4,6 +4,8 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
+<%@ page import="java.util.Calendar" %>
+
 
 <%
     request.setCharacterEncoding("utf-8");
@@ -23,6 +25,7 @@
     </script>
 
 <%
+}
     Class.forName("com.mysql.jdbc.Driver");
     Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10","Sohyunxxi","1234");
    
@@ -54,6 +57,19 @@
             session.setAttribute("userName", name);
             response.sendRedirect("mainCalendar.jsp");
             response.sendRedirect("mainCalendar.jsp");
+
+            
+            //date 변수와 Calendar 변수의 차이
+            Calendar cal = Calendar.getInstance();
+
+            // 년, 월, 일을 각각 변수에 저장
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH) + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            session.setAttribute("year", year);
+            session.setAttribute("month", month);
+            session.setAttribute("day", day);
+
         } 
         else {
             //로그인 실패

@@ -1,0 +1,589 @@
+
+#mainFont {
+    font-size: 60px;
+}
+
+#loginBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.insertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+}
+
+#pwInsertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+    margin-left: 180px;
+}
+
+#confirmInsertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+    margin-left: 220px;
+}
+
+#telInsertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+    margin-left: 140px;
+}
+
+#teamInsertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+    margin-left: 140px;
+}
+
+#occInsertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+    margin-left: 100px;
+}
+
+#idBox {
+    margin-left: 25px;
+    margin-right: 15px;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+}
+
+#nameBox {
+    margin-left: 25px;
+    margin-right: 15px;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+}
+
+#nameFont {
+    margin-left: 30px;
+}
+
+#idFont {
+    margin-left: 40px;
+}
+
+#pwBox {
+    width: 250px;
+    height: 50px;
+    margin-left: 25px;
+    margin-right: 40px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#confirmPwBox {
+    width: 250px;
+    height: 50px;
+    margin-left: 25px;
+    margin-right: 140px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#telBox {
+    width: 250px;
+    height: 50px;
+    margin-left: 25px;
+    margin-right: 40px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#linkBox {
+    margin-top: 50px;
+}
+
+#checkButton {
+    width: 150px;
+    height: 45px;
+    background-color: #70AD47;
+    color: #FFFFFF;
+    border: 1px solid #70AD47;
+    border-radius: 15px;
+    font-size: 18px;
+    margin-left: 25px;
+}
+
+#button {
+    width: 180px;
+    height: 70px;
+    background-color: #70AD47;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 20px;
+    border-color: #70AD47;
+    margin-top: 50px;
+}
+
+#pwFont {
+    margin-left: 30px;
+}
+
+#telFont {
+    margin-left: 80px;
+}
+
+.linkFont {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 17px;
+}
+
+#selectOcc {
+    margin-left: 25px;
+    margin-right: 20px;
+
+}
+
+#selectTeam {
+    margin-right: 20px;
+}
+
+#hiddenPW {
+    display: none;
+    font-size: 25px;
+    margin-left: 25px;
+}
+
+.selectFont {
+    font-size: 30px;
+}
+
+#teamBox {
+    margin-right: 65px;
+}
+
+#leaderBox {
+    margin-right: 120px;
+}
+
+footer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+#buttonBox {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 40%;
+}
+
+#backImg {
+    width: 75px;
+    height: 75px;
+    background-color: transparent;
+    border-radius: 37.5px;
+    margin-right: 40%;
+}
+
+.footerButtons {
+    width: 180px;
+    height: 70px;
+    background-color: #70AD47;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 20px;
+    border-color: #70AD47;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+@media screen and (min-width: 1200px) {
+
+
+}
+
+
+@media screen and (min-width: 480px) and (max-width: 1199px) {
+
+
+    #mainFont {
+        padding-top: 50px;
+        font-size: 50px;
+    }
+
+    .nameFont {
+        margin-left: 15px;
+    }
+
+    #loginBox {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
+
+    #idBox {
+        margin-left: 16px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #pwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 12.5px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #nameBox {
+        margin-left: 25px;
+        margin-right: 15px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #button {
+        width: 120px;
+        height: 50px;
+        background-color: #70AD47;
+        border-radius: 7.5px;
+        color: #FFFFFF;
+        font-size: 15px;
+        border-color: #70AD47;
+        margin-top: 15px;
+    }
+
+    .insertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        font-size: 23px;
+    }
+
+    #checkButton {
+        width: 130px;
+        height: 40px;
+        background-color: #70AD47;
+        color: #FFFFFF;
+        border: 1px solid #70AD47;
+        border-radius: 13px;
+        font-size: 14px;
+        margin-left: 20px;
+    }
+
+    .footerButtons {
+        width: 140px;
+        height: 50px;
+        background-color: #70AD47;
+        border-radius: 15px;
+        color: #FFFFFF;
+        font-size: 20px;
+        border-color: #70AD47;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    #pwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+    }
+
+    #confirmPwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 140px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    #telBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    #pwInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        margin-left: 18px;
+        font-size: 22px;
+
+    }
+
+    #confirmInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        margin-left: 15px;
+        font-size: 22px;
+    }
+
+    #telInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        margin-left: 14px;
+        font-size: 22px;
+
+    }
+
+    #teamInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        margin-left: 14px;
+        font-size: 22px;
+
+    }
+
+    #occInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        margin-left: 10px;
+        font-size: 22px;
+
+    }
+
+    .selectFont {
+        font-size: 22px;
+    }
+
+}
+
+
+@media screen and (max-width: 479px) {
+
+
+    #mainFont {
+        padding-top: 50px;
+        font-size: 50px;
+    }
+
+    .nameFont {
+        margin-left: 15px;
+    }
+
+    #loginBox {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
+
+    #idBox {
+        margin-left: 16px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #pwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 12.5px;
+        margin-right: 10px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #nameBox {
+        margin-left: 25px;
+        margin-right: 15px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #button {
+        width: 120px;
+        height: 50px;
+        background-color: #70AD47;
+        border-radius: 7.5px;
+        color: #FFFFFF;
+        font-size: 15px;
+        border-color: #70AD47;
+        margin-top: 15px;
+    }
+
+    .insertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 30px;
+        font-size: 23px;
+    }
+
+    #checkButton {
+        width: 130px;
+        height: 40px;
+        background-color: #70AD47;
+        color: #FFFFFF;
+        border: 1px solid #70AD47;
+        border-radius: 13px;
+        font-size: 14px;
+        margin-left: 20px;
+    }
+
+    .footerButtons {
+        width: 140px;
+        height: 50px;
+        background-color: #70AD47;
+        border-radius: 15px;
+        color: #FFFFFF;
+        font-size: 20px;
+        border-color: #70AD47;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    #pwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+    }
+
+    #confirmPwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 14px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    #telBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    #pwInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 10px;
+        margin-left: 18px;
+        font-size: 22px;
+
+    }
+
+    #confirmInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0px;
+        font-size: 22px;
+    }
+
+    #telInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0px;
+        margin-left: 14px;
+        font-size: 22px;
+
+    }
+
+    #teamInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 10px;
+        margin-left: 14px;
+        font-size: 22px;
+
+    }
+
+    #occInsertBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 10px;
+        margin-left: 100px;
+        font-size: 22px;
+
+    }
+
+    .selectFont {
+        font-size: 22px;
+    }
+
+    #pwFont {
+        margin-left: 5px;
+    }
+
+    #telFont {
+        margin-left: 8px;
+    }
+}

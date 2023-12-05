@@ -1,0 +1,364 @@
+
+
+#mainFont {
+    font-size: 60px;
+}
+
+#loginBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 30px;
+}
+
+.insertBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+}
+
+
+#nameBox {
+    margin-left: 25px;
+    margin-right: 15px;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#nameFont {
+    margin-left: 30px;
+}
+
+#idFont {
+    margin-left: 100px;
+}
+
+#pwBox {
+    width: 250px;
+    height: 50px;
+    margin-left: 25px;
+    margin-right: 40px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#comfirmPwBox {
+    width: 250px;
+    height: 50px;
+    margin-left: 25px;
+    margin-right: 140px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#numBox {
+    width: 250px;
+    height: 50px;
+    margin-left: 25px;
+    margin-right: 40px;
+    border-radius: 10px;
+    border: 1px solid #70AD47;
+    text-align: center;
+}
+
+#linkBox {
+    margin-top: 50px;
+}
+
+#checkButton {
+    width: 100px;
+    height: 45px;
+    background-color: #70AD47;
+    color: #FFFFFF;
+    border: 1px solid #70AD47;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+#button {
+    width: 180px;
+    height: 70px;
+    background-color: #70AD47;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 20px;
+    border-color: #70AD47;
+    margin-top: 50px;
+}
+
+.linkFont {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 17px;
+}
+
+#selectOcc {
+    margin-left: 25px;
+    margin-right: 20px;
+
+}
+
+#selectTeam {
+    margin-left: 43px;
+    margin-right: 20px;
+}
+
+#selectBox {
+    font-size: 25px;
+    margin-right: 165px;
+}
+
+.selectFont {
+    font-size: 25px;
+    margin-right: 170px;
+}
+
+.fontSize {
+    font-size: 30px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+/* 모달 내부의 버튼 스타일 */
+.modal button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+
+@media screen and (min-width: 1200px) {
+
+
+}
+
+@media screen and (min-width: 480px) and (max-width: 1199px) {
+
+    #mainFont {
+        padding-top: 50px;
+        font-size: 50px;
+    }
+
+    #nameFont {
+        margin-left: 15px;
+    }
+
+    #idBox {
+        margin-left: 16px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #pwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 12.5px;
+        margin-right: 18px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #comfirmPwBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 20px;
+        margin-right: 70px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+    }
+
+    #nameBox {
+        margin-left: 25px;
+        margin-right: 15px;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #numBox {
+        width: 200px;
+        height: 40px;
+        margin-left: 25px;
+        margin-right: 40px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+    }
+
+    #button {
+        width: 120px;
+        height: 50px;
+        background-color: #70AD47;
+        border-radius: 7.5px;
+        color: #FFFFFF;
+        font-size: 15px;
+        border-color: #70AD47;
+        margin-top: 15px;
+    }
+
+    #checkButton {
+        width: 100px;
+        height: 37px;
+        background-color: #70AD47;
+        color: #FFFFFF;
+        border: 1px solid #70AD47;
+        border-radius: 15px;
+        font-size: 14px;
+    }
+
+    .fontSize {
+        font-size: 20px;
+    }
+
+    .selectFont {
+        font-size: 18px;
+        margin-right: 180px;
+    }
+
+    #selectBox {
+        font-size: 18px;
+        margin-right: 165px;
+    }
+
+
+}
+
+@media screen and (max-width: 479px) {
+
+    #mainFont {
+        padding-top: 50px;
+        font-size: 30px;
+    }
+
+    #nameFont {
+        margin-left: 0px;
+    }
+
+    #nameBox {
+        margin-left: 30px;
+        margin-right: 15px;
+        width: 125px;
+        height: 25px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #loginBox {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        font-size: 30px;
+    }
+
+    #idBox {
+        margin-left: 16px;
+        width: 125px;
+        height: 25px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #pwBox {
+        width: 140px;
+        height: 25px;
+        margin-left: 12.5px;
+        margin-right: 10px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+    }
+
+    #comfirmPwBox {
+        width: 140px;
+        height: 25px;
+        margin-left: 12.5px;
+        margin-right: 10px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+    }
+
+    #numBox {
+        width: 140px;
+        height: 25px;
+        margin-left: 25px;
+        margin-right: 20px;
+        border-radius: 10px;
+        border: 1px solid #70AD47;
+        text-align: center;
+    }
+
+    #button {
+        width: 120px;
+        height: 50px;
+        background-color: #70AD47;
+        border-radius: 7.5px;
+        color: #FFFFFF;
+        font-size: 15px;
+        border-color: #70AD47;
+        margin-top: 15px;
+    }
+
+    #checkButton {
+        width: 100px;
+        height: 37px;
+        background-color: #70AD47;
+        color: #FFFFFF;
+        border: 1px solid #70AD47;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+
+    .fontSize {
+        font-size: 15px;
+    }
+
+    #idFont {
+        margin-left: 0;
+    }
+
+    .selectFont {
+        font-size: 15px;
+        margin-right: 50px;
+    }
+
+    #selectBox {
+        font-size: 18px;
+        margin-right: 20px;
+    }
+
+    #selectTeam {
+        margin-right: 20px;
+        margin-left: 0px;
+
+    }
+
+    #selectOcc {
+        margin-left: 0px;
+        margin-right: 20px;
+    }
+}

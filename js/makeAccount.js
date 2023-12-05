@@ -1,12 +1,12 @@
 function checkIdDuplicate() {
     var idInput = document.getElementById('idBox');
     var idValue = idInput.value.trim();
-    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{4,12}$/;
+    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;
 
     if (idValue === '') {
         alert('아이디를 입력하세요.');
     } else if (!idRegex.test(idValue)) {
-        alert('아이디는 영어와 숫자를 포함하여 4자리 이상 12자리 이하로 설정해주세요.');
+        alert('아이디는 영어와 숫자를 포함하여 6자리 이상 12자리 이하로 설정해주세요.');
     } else {
         var xhr = new XMLHttpRequest(); //XMLHttpRequest 객체를 생성, 비동기통신인데 서버랑 클라이언트 간 데이터 교환 담당
         xhr.open('POST', 'checkIdDuplicate.jsp', false); // false로 설정해서 동기적으로 통신
@@ -132,8 +132,8 @@ function checkNoInput() {
     var idDuplicationCheck = document.getElementById('idDuplicationCheck');
 
     var phoneNumberRegex = /^\d+$/;  // 숫자만 허용하는 정규표현식
-    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{4,12}$/;  // 영어와 숫자를 포함하고, 4자리 이상 12자리 이하
-    var nameRegex = /^[a-zA-Z가-힣]*{2,35}$/;
+    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;  // 영어와 숫자를 포함하고, 6자리 이상 12자리 이하
+    var nameRegex = /^[a-zA-Z가-힣]*{2,50}$/;
 
     
     if (nameInput.value.trim() === '' ||
@@ -143,7 +143,7 @@ function checkNoInput() {
         numInput.value.trim() === '') {
         alert('모든 필수 입력란을 채워주세요.');
     } else if (!nameRegex.test(nameInput.value)) {
-        validationMessage.textContent = '영어 또는 한글만 2자리 이상 35자리 이하로 입력 가능합니다.';
+        validationMessage.textContent = '영어 또는 한글만 2자리 이상 50자리 이하로 입력 가능합니다.';
         nameInput.focus();
     } else if (!idRegex.test(idInput.value.trim())) {
         alert('아이디는 영어와 숫자를 포함하여 4자리 이상 12자리 이하로 설정해주세요.');
@@ -195,9 +195,9 @@ function checkNameEvent(){
 function checkIdEvent(){
     var idInput = document.getElementById('idBox');
     var idInputMessage = document.getElementById('idInputMessage');
-    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{4,12}$/;
+    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;
     if (!idRegex.test(idInput.value.trim())) {
-        idInputMessage.textContent = '아이디는 영어와 숫자를 포함하여 4자리 이상 12자리 이하로 설정해주세요.';
+        idInputMessage.textContent = '아이디는 영어와 숫자를 포함하여 6자리 이상 12자리 이하로 설정해주세요.';
     } else {
        idInputMessage.textContent = '';
     }
