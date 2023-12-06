@@ -421,9 +421,12 @@ function updatePlanEvent(event) {
     }
 
 
-    function openModalEvent(selectedMonth, day) {
-        var modalDate = selectedMonth + "월 " + day + "일 ";
+    function openModalEvent(selectedMonth, selectDay) {
+        var modalDate = selectedMonth + "월 " + selectDay + "일 ";
         var modalCompareDate = modalDate;
+
+        console.log("월"+selectedMonth);
+        console.log("일"+selectDay);
 
         // 새 창 열기
         var modalWindow = window.open('', '_blank', 'width=600, height=400, resizable=yes');
@@ -434,8 +437,8 @@ function updatePlanEvent(event) {
 
             <div id="innerModal">
                
-                <form action="makeEvent.jsp">
-                    <h2 id="modalDate" >모달 날짜 나오는곳</h2>
+                <form id="innerForm" action="makeEvent.jsp">
+                    <div id="innerDiv" ></div>
                     <input type="hidden" id="eventDate" name="eventDate" value="날짜">
                 <span id="planCount"></span>
                 <hr>
@@ -462,9 +465,12 @@ function updatePlanEvent(event) {
         </div>
         </div>
         `;
-
-        // 모달 내용을 새 창에 삽입
         modalWindow.document.body.innerHTML = modalContent;
+
+        var spanElement = modalWindow.document.createElement('span');
+        spanElement.textContent = selectedMonth + '월 ' + selectDay + '일 일정';
+        modalWindow.document.getElementById('innerDiv').appendChild(spanElement);
+        // 모달 내용을 새 창에 삽입
 
         // 추가적인 작업 수행
         doAdditionalWork();
