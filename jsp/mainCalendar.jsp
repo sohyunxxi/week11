@@ -22,9 +22,6 @@
     int month = (Integer)session.getAttribute("month");
     int day = (Integer)session.getAttribute("day");
 
-    int eventYear=Integer.parseInt(request.getParameter("eventYear"));
-    int eventMonth=Integer.parseInt(request.getParameter("eventYear"));
-    int eventDay=Integer.parseInt(request.getParameter("eventYear"));
 
     ArrayList<String> nameList= new ArrayList<String>();
     ArrayList<String> idList= new ArrayList<String>();
@@ -37,8 +34,7 @@
 
     int showTeamIdx=0;
 
-    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx>0){
-            
+    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx <= 0 || String.valueOf(idx).trim().isEmpty()) {      
         response.sendRedirect("login.jsp");
     }
     else{
@@ -64,11 +60,7 @@
                 idList.add("\""+t_id+"\"");
             }
         }
-    
-        if(eventYear>0||eventMonth>0||eventDay>0){
-            eventYear=year;
-            eventMonth=month;
-            eventDay=day;
+
 
             //해당 달에 해당하는 이벤트만 가져오기
             String eventSql = "SELECT event_idx, start_time, event_content FROM event WHERE user_idx = ? AND YEAR(start_time) = ? AND MONTH(start_time) = ? " +
@@ -98,41 +90,10 @@
                 timeList.add("\"" + formattedTime + "\"");
                 dayList.add("\"" + formattedTimeDay + "\"");
                 eventList.add("\"" + e_eventContent + "\"");
-            }
-    
-        }
-        else{
-            //해당 달에 해당하는 이벤트만 가져오기
-            String eventSql = "SELECT event_idx, start_time, event_content FROM event " +
-            "WHERE user_idx = ? AND YEAR(start_time) = ? AND MONTH(start_time) = ? " +
-            "ORDER BY start_time ASC";
-            PreparedStatement eventQuery = connect.prepareStatement(eventSql);
-            eventQuery.setInt(1, eventYear);
-            eventQuery.setInt(1, eventMonth);
-        
-        
-            ResultSet eventRs = eventQuery.executeQuery();
-        
-            while (eventRs.next()) {
-                int e_eventIdx = eventRs.getInt(1);
-                LocalDateTime e_time = eventRs.getObject(2, LocalDateTime.class);
-                
-                // 년, 월, 일 추출
-                int listYear = e_time.getYear();
-                int listMonth = e_time.getMonthValue();
-                int listDay = e_time.getDayOfMonth();
             
-                String formattedTimeDay = String.format("%04d-%02d-%02d", year, month, day);
-                String formattedTime = String.format("%02d:%02d", e_time.getHour(), e_time.getMinute());
-                String e_eventContent = eventRs.getString(3);
+      
         
-                eventIdx.add(e_eventIdx);  // event_idx를 ArrayList<Integer>에 저장
-                timeList.add("\"" + formattedTime + "\"");
-                dayList.add("\"" + formattedTimeDay + "\"");
-                eventList.add("\"" + e_eventContent + "\"");
-            }
-        
-        }
+                }     
     }
     
     
@@ -152,30 +113,30 @@
 
 <body onload="presentMonth()">
     <header>
-        <div id="yearBox">
-            <button onclick="previousYearEvent()" class="yearButton">
-                <img class="yearImage" src="../image/year_left.png">
-            </button>
-                <form action="makeEvent.jsp">
+        <form action="updateDate.jsp">
+            <div id="yearBox">
+                <button onclick="previousYearEvent()" class="yearButton"><img class="yearImage" src="../image/year_left.png"></button>
                     <h1 id="year" name="year"><%=year %></h1>
-                    <input type="hidden" id="yearHidden" name="year" value="2023">
-                </form>
-            <button onclick="nextYearEvent()" class="yearButton"><img class="yearImage" src="../image/year_right.png"></button>
-        </div>
-            <div id="months">
-                <button class="monthButton" value="1" onclick="daysOfMonth(this)">1</button>
-                <button class="monthButton" value="2" onclick="daysOfMonth(this)">2</button>
-                <button class="monthButton" value="3" onclick="daysOfMonth(this)">3</button>
-                <button class="monthButton" value="4" onclick="daysOfMonth(this)">4</button>
-                <button class="monthButton" value="5" onclick="daysOfMonth(this)">5</button>
-                <button class="monthButton" value="6" onclick="daysOfMonth(this)">6</button>
-                <button class="monthButton" value="7" onclick="daysOfMonth(this)">7</button>
-                <button class="monthButton" value="8" onclick="daysOfMonth(this)">8</button>
-                <button class="monthButton" value="9" onclick="daysOfMonth(this)">9</button>
-                <button class="monthButton" value="10" onclick="daysOfMonth(this)">10</button>
-                <button class="monthButton" value="11" onclick="daysOfMonth(this)">11</button>
-                <button class="monthButton" value="12" onclick="daysOfMonth(this)">12</button>
+                    <input type="hidden" id="yearHidden" name="yearHidden" value="<%=year %>">
+                <button onclick="nextYearEvent()" class="yearButton"><img class="yearImage" src="../image/year_right.png"></button>
             </div>
+        </form>
+        <form action="updateDate.jsp">
+            <div id="months">
+                <button class="monthButton" value="1" onclick="daysOfMonthEvent(this)">1</button>
+                <button class="monthButton" value="2" onclick="daysOfMonthEvent(this)">2</button>
+                <button class="monthButton" value="3" onclick="daysOfMonthEvent(this)">3</button>
+                <button class="monthButton" value="4" onclick="daysOfMonthEvent(this)">4</button>
+                <button class="monthButton" value="5" onclick="daysOfMonthEvent(this)">5</button>
+                <button class="monthButton" value="6" onclick="daysOfMonthEvent(this)">6</button>
+                <button class="monthButton" value="7" onclick="daysOfMonthEvent(this)">7</button>
+                <button class="monthButton" value="8" onclick="daysOfMonthEvent(this)">8</button>
+                <button class="monthButton" value="9" onclick="daysOfMonthEvent(this)">9</button>
+                <button class="monthButton" value="10" onclick="daysOfMonthEvent(this)">10</button>
+                <button class="monthButton" value="11" onclick="daysOfMonthEvent(this)">11</button>
+                <button class="monthButton" value="12" onclick="daysOfMonthEvent(this)">12</button>
+            </div>
+        </form>
     </header>
     <hr id="divideLine">
     <nav>
@@ -191,7 +152,7 @@
             <span class="userInfoFont">전화번호 : <%=tel %> </span>
             <div id="buttonBox">
                 <button class="navButton"><a class="noColor" href="showInfo.jsp">내 정보</a></button>
-                <button class="navButton"><a class="noColor" href="logout.jsp">로그아웃</a></button>
+                <button class="navButton"><a class="noColor" href="../action/logoutAction.jsp">로그아웃</a></button>
             </div>
             <hr class="lineColor" id="insertNext">
             <span id="teamList">팀원 목록</span>
@@ -207,24 +168,20 @@
 
     </main>
 
-   
-
     <div id="blackBox">
 
     </div>
 
-
-    <script src="../js/calender.js"></script>
-</body>
 <script>
     var day = 0;
     var selectedButton = null;
-    var selectedMonth = 0;
+    var selectedMonth = <%=month%>;
     var eventDateMatch = "";
 
     var idList = <%=idList%>;
     var nameList = <%=nameList%>;
     var idxTeamList = <%=idxTeamList%>;
+    var role = "<%=role%>";
     var modalCompareDate = "";
 
 
@@ -232,7 +189,7 @@
     var teamList = document.getElementById("insertNext");
     var peopleBox = document.getElementById("peopleBox");
     //팀장인 경우에만
-    if(<%=role%> == "팀장"){
+    if(role == "팀장"){
         var teamList = document.createElement("span");
         teamList.innerText = "팀원 목록";
 
@@ -253,18 +210,15 @@
         }
     }
     
-
     function changeUser(num){
         console.log(num);
         //num은 해당 유저의 idx고, 이 유저의 일정 리스트를 가져오게끔 하고싶음.
         //<%=showTeamIdx%> = num;
     }
 
-
-    function daysOfMonth(button) {
+    function daysOfMonthEvent(button) {
         if (button.value == 2) {
             day = 28;
-
         }
         else if (button.value == 1 || button.value == 3 || button.value == 5 || button.value == 7 || button.value == 8 || button.value == 10 || button.value == 12) {
             day = 31;
@@ -272,37 +226,45 @@
         else {
             day = 30;
         }
-        changeButtonColorEvent(button);
-
+        changeButtonColor(button);
 
     }
 
-    function changeButtonColorEvent(button) {
+    function changeButtonColor(button) {
 
         if (selectedButton && selectedButton.tagName === 'BUTTON') {
             selectedButton.removeAttribute("id");
+            selectedButton.removeAttribute("name");
         }
 
+        button.name = "selectedMonth";
         button.id = "selected";
-        <%=eventMonth%> = button.value;
 
         selectedButton = button;
         selectedMonth = button.value;
         console.log(selectedMonth);
         console.log(button.value);
 
-
-        makeCalendarEvent(day);
+        updateMonthOnServer(selectedMonth);
+        makeCalendar(day);
     }
 
+    function updateMonthOnServer(month) {
+    // 폼 생성
+        sessionStorage.setItem("month",month);
+        console.log("달: "+ <%=month%>);
+        //location.href="mainCalendar.jsp";
+        
+}
     function presentMonth() {//백엔드에서 처리하기
-        var month = <%=eventMonth%>;
+        var month = <%=month%>;
 
         // 아래와 같이 수정하여 버튼 객체를 만들어서 전달
         var button = document.querySelector('.monthButton[value="' + month + '"]');
-        daysOfMonth(button);
+        daysOfMonthEvent(button);
 
         console.log(month); //배경화면 띄우기
+        
     }
 
     function previousYearEvent() {//날짜 변경해서 폼태그로 연결하기
@@ -314,10 +276,10 @@
             var numHidden = parseInt(yearHidden.value);
             if (num > 0) {
                 year.innerText = (num - 1).toString().padStart(4, '0');
-                <%=eventYear%> = (num - 1).toString().padStart(4, '0');
                 yearHidden.value = (numHidden - 1).toString().padStart(4, '0');
             }
         }
+        updateYearOnServer(yearHidden.value);
     }
 
     function nextYearEvent() {
@@ -328,13 +290,21 @@
             var numHidden = parseInt(yearHidden.value);
             if (num < 9999) {
                 year.innerText = (num + 1).toString().padStart(4, '0');
-                <%=eventYear%> = (num + 1).toString().padStart(4, '0');
                 yearHidden.value = (numHidden + 1).toString().padStart(4, '0');
             }
             
         }
+        updateYearOnServer(yearHidden.value);
     }
-    function makeCalendarEvent(day) {//이벤트 빼기
+
+    function updateYearOnServer(year) {
+        sessionStorage.setItem("year",year);
+        console.log(<%=year%>);
+        location.href="mainCalendar.jsp";
+        
+    }
+
+    function makeCalendar(day) {
         var calendarBox = document.getElementsByTagName("main")[0];
         calendarBox.innerHTML = "";
         var days = document.createElement("div");
@@ -361,6 +331,7 @@
         hidden.style.right = "0";
         black.style.display = "block";
     }
+
     function closeMenu() {
 
         var hidden = document.getElementById('hidden');
@@ -451,70 +422,52 @@ function updatePlanEvent(event) {
 
 
     function openModalEvent(selectedMonth, day) {
-    var modalDate = selectedMonth + "월 " + day + "일 ";
-    var modalCompareDate = modalDate;
+        var modalDate = selectedMonth + "월 " + day + "일 ";
+        var modalCompareDate = modalDate;
 
-    // 새 창 열기
-    var modalWindow = window.open('', '_blank', 'width=600, height=400, resizable=yes');
+        // 새 창 열기
+        var modalWindow = window.open('', '_blank', 'width=600, height=400, resizable=yes');
 
-    // 모달 내용 생성
-    var modalContent = `
-    <div id="modal">
+        // 모달 내용 생성
+        var modalContent = `
+        <div id="modal">
 
-        <div id="innerModal">
-            <span class="close" onclick="closeModalEvent()">&times;</span>
-            <form action="makeEvent.jsp">
-                <h2 id="modalDate" >모달 날짜 나오는곳</h2>
-                <input type="hidden" id="eventDate" name="eventDate" value="날짜">
-            <span id="planCount"></span>
-            <hr>
-            <hr>
-            <div id="planBox">
-              
+            <div id="innerModal">
+               
+                <form action="makeEvent.jsp">
+                    <h2 id="modalDate" >모달 날짜 나오는곳</h2>
+                    <input type="hidden" id="eventDate" name="eventDate" value="날짜">
+                <span id="planCount"></span>
+                <hr>
+                <hr>
+                <div id="planBox">
+                
+                </div>
+                <hr>
+                <h3>일정 추가</h3>
+                <hr>
+            
+                    <div id="modalTimeBox">
+                        <span>일정 시간</span>
+                      <input type="time">
+                    </div>
+                    <div id="planInputBox">
+                        <span>일정 내용</span>
+                        <textarea class="planInput" name="eventContent" placeholder="최대 50자까지 적을 수 있습니다. " cols="55" rows="5" maxlength="50"></textarea>
+                    </div>
+                    <button class="modalPlanButton">등록</button>
+                </form>
             </div>
-            <hr>
-            <h3>일정 추가</h3>
-            <hr>
-           
-                <div id="modalTimeBox">
-                    <span>일정 시간</span>
-                    <div class="modalTime">
-                        <div class="modalButtons">
-                            <button type="button" onclick="timeFront('hour')"><img class="modalButtonPic" src="../image/upButton.png"></button>
-                            <button type="button" onclick="timeBack('hour')"><img class="modalButtonPic" src="../image/downButton.png"></button>
-                        </div>
-                        <span class="modalTimeNum hour">00</span>
-                        <input type="hidden" name="hourHidden" class="modalTimeNum" value="00">
 
-                        <span class="modalTimeNum">시</span>
-                    </div>
-                    <div class="modalTime">
-                        <div class="modalButtons">
-                            <button type="button" onclick="timeFront('minute')"><img class="modalButtonPic" src="../image/upButton.png"></button>
-                            <button type="button" onclick="timeBack('minute')"><img class="modalButtonPic" src="../image/downButton.png"></button>
-                        </div>
-                        <span class="modalTimeNum minute">00</span>
-                        <input type="hidden" name="minuteHidden" class="modalTimeNum" value="00">
-                        <span class="modalTimeNum">분</span>
-                    </div>
-                </div>
-                <div id="planInputBox">
-                    <span>일정 내용</span>
-                    <textarea class="planInput" name="eventContent" placeholder="최대 50자까지 적을 수 있습니다. " cols="55" rows="5" maxlength="50"></textarea>
-                </div>
-                <button class="modalPlanButton">등록</button>
-            </form>
         </div>
+        </div>
+        `;
 
-    </div>
-    </div>
-    `;
+        // 모달 내용을 새 창에 삽입
+        modalWindow.document.body.innerHTML = modalContent;
 
-    // 모달 내용을 새 창에 삽입
-    modalWindow.document.body.innerHTML = modalContent;
-
-    // 추가적인 작업 수행
-    doAdditionalWork();
+        // 추가적인 작업 수행
+        doAdditionalWork();
 }
 
     function doAdditionalWork() {
@@ -640,5 +593,6 @@ function updatePlanEvent(event) {
 
 
 </script>
+</body>
 </html>
 

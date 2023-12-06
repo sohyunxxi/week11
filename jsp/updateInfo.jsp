@@ -36,7 +36,7 @@
     <header>
         <h1 id="mainFont">내 정보 수정</h1>
     </header>
-    <form action="updateInfoAction.jsp">
+    <form action="../action/updateInfoAction.jsp">
         <main>
             <div id="loginBox">
                 <div class="insertBox">
@@ -54,7 +54,7 @@
                 </div>
                 <div id="confirmInsertBox">
                     <span>재확인 비밀번호 : </span>
-                    <input id="confirmPwBox" type="password" placeholder="4자 이상 16자 이하로 입력해주세요." value="<%=pw %>"></span>
+                    <input id="confirmPwBox"  name="confirmPw"type="password" placeholder="4자 이상 16자 이하로 입력해주세요." value="<%=pw %>"></span>
                 </div>
                 <div id="telInsertBox">
                     <span id="telFont">전화번호 : </span>
@@ -79,11 +79,38 @@
         <footer>
             <img src="../image/back.png" id="backImg" onclick="moveBackEvent()">
                 <div id="buttonBox">
-                    <button class="footerButtons" onclick="updateEvent()">완료</button>
+                    <button class="footerButtons" type="button" onclick="updateEvent()">완료</button>
                 </div>
         </footer>
     </form>
     <script src="../js/showInfo.js"></script>
+    <script>
+        function checkRadioButtons() {
+            var role = "<%= (String)session.getAttribute("role") %>";
+            var team = "<%= (String)session.getAttribute("team") %>";
+
+            if (role && team) {
+                var teamRadioButtons = document.getElementsByName("team");
+                for (var i = 0; i < teamRadioButtons.length; i++) {
+                    if (teamRadioButtons[i].value === team) {
+                        teamRadioButtons[i].checked = true;
+                        break;
+                    }
+                }
+
+                var roleRadioButtons = document.getElementsByName("company");
+                for (var j = 0; j < roleRadioButtons.length; j++) {
+                    if (roleRadioButtons[j].value === role) {
+                        roleRadioButtons[j].checked = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 페이지 로드 시 실행
+        checkRadioButtons();
+    </script>
 </body>
 
 </html>

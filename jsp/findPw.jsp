@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1 id="mainFont">비밀번호 찾기</h1>
-    <form action="findPwAction.jsp">
+    <form action="../action/findPwAction.jsp">
         <div id="loginBox">
             <div class="insertBox">
                 <span id="nameFont">이름 : </span>
@@ -31,7 +31,7 @@
                 <span>전화번호 : </span>
                 <input id="pwBox" name="tel" type="text" length="18" maxlength="16">
             </div>
-            <button id="button" >비밀번호 찾기</button>
+            <button id="button" type="button" onclick="searchPw()">비밀번호 찾기</button>
         </div>
     </form>
     <script src="../js/makeAccount.js"></script>

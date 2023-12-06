@@ -18,7 +18,7 @@
 </head>
 <body>
     <h1 id="mainFont">아이디 찾기</h1>
-    <form action="findIdAction.jsp">
+    <form action="../action/findIdAction.jsp">
         <div id="loginBox">
             <div class="insertBox">
                 <span id="nameFont">이름 : </span>
@@ -28,7 +28,7 @@
                 <span>전화번호 : </span>
                 <input id="pwBox" name="tel" type="text" length="18" maxlength="16">
             </div>
-            <button id="button">아이디 찾기</button>
+            <button id="button" type="button" onclick="searchId()">아이디 찾기</button>
         </div>
     </form>
     <script src="../js/makeAccount.js"></script>

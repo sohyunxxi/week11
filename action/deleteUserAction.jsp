@@ -15,15 +15,9 @@
     String team =(String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
     int idx = (Integer)session.getAttribute("idx");
-
-    if (name == null) {
-        response.sendRedirect("login.jsp");
-    }
     
-    Connection connect = null;
-    try {
         Class.forName("com.mysql.jdbc.Driver");
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/week10", "Sohyunxxi", "1234");
+        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10", "Sohyunxxi", "1234");
 
         // SQL 만들기
         String sql = "DELETE FROM user WHERE user_idx = ?";
@@ -32,9 +26,8 @@
 
         // query 전송
         query.executeUpdate();
-    } catch (Exception e) {
-        e.printStackTrace();
-    } 
+        session.invalidate(); // 세션 무효화 (로그아웃)
+
 %>
 
 <head>
@@ -45,6 +38,6 @@
 <body>
     <script>
         alert("회원 정보를 삭제합니다. 안녕~");
-        location.href = "login.jsp";
+        location.href = "../jsp/login.jsp";
     </script>
 </body>

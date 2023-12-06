@@ -14,7 +14,7 @@
     String tel = (String)session.getAttribute("tel");
     Integer idx = (Integer)session.getAttribute("idx");
 
-    if (name == null && id == null && pw == null && role == null && team == null && tel == null  && idx != null && idx > 0)
+    if (name != null && id != null && pw != null && role != null && team != null && tel != null  && idx != null && idx > 0)
      {
 %>
     <script>

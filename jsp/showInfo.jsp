@@ -71,14 +71,14 @@
         </form>
     </main>
     <footer>
-        <img src="../image/back.png" id="backImg" onclick="moveBackEvent()">
+        <img src="../image/back.png" id="backImg" type="button" onclick="moveBackEvent()">
         <div id="buttonBox">
             <form action="updateInfo.jsp">
                 <button class="footerButtons">
                     수정
                 </button>
             </form>
-            <form action="deleteAccountAction.jsp">
+            <form action="../action/deleteUserAction.jsp">
                 <button class="footerButtons">탈퇴</button>
             </form>
         </div>
