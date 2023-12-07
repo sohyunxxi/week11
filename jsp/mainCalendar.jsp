@@ -424,8 +424,10 @@
                 if(i+1==showMonthCount[j]){
                 var count=document.createElement("span");
                 count.className="countFont";
-                if(showEventCount>8){
+                if(showEventCount[j]>8){
                     count.innerText="+9";
+                    dayBox.appendChild(count);
+
                 }
                 else{
                     count.innerText=showEventCount[j];
