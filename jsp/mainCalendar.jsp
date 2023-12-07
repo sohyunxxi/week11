@@ -658,8 +658,10 @@
             div.appendChild(spanTime);
             div.appendChild(spanContentInfo);
             div.appendChild(spanContent);
-            div.appendChild(updateButton);
-            div.appendChild(deleteButton);
+            if(showTeamIdx==0){
+                div.appendChild(updateButton);
+                div.appendChild(deleteButton);
+            }
             div.appendChild(hidden);
             var planBox =  modalWindow.document.getElementById("planBox");
             planBox.appendChild(div);
