@@ -18,20 +18,16 @@
     int year = (Integer)session.getAttribute("year");
     int month = (Integer)session.getAttribute("month");
     int day = (Integer)session.getAttribute("day");
-
-    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx <= 0 || String.valueOf(idx).trim().isEmpty()) {      
-        response.sendRedirect("login.jsp");
+    
+    int teamNum = 0;
+    String teamNumParam = request.getParameter("teamIdx");
+    if (teamNumParam != null && !teamNumParam.trim().isEmpty()) {
+        teamNum = Integer.parseInt(teamNumParam);
     }
-    else{
-        
-        int eventYear = (request.getParameter("yearHidden")  != null) ? Integer.parseInt(request.getParameter("yearHidden")) : year;
-        int eventMonth = (request.getParameter("selectedMonth") != null) ? Integer.parseInt(request.getParameter("selectedMonth")) : month;
-        session.setAttribute("year", eventYear);
-        session.setAttribute("month", eventMonth);
 
-        response.sendRedirect("mainCalendar.jsp");
+    String teamName = request.getParameter("teamName");
 
-    }
-    //버튼에다가도 폼 만들어서 클릭한 버튼이면 거기에 input hidden 만들어서 월 값 넘기기
-    //
+    session.setAttribute("teamIdx", teamNum);
+    session.setAttribute("teamName", teamName);
+    response.sendRedirect("../jsp/mainCalendar.jsp");
 %>

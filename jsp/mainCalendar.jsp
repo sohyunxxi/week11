@@ -33,26 +33,19 @@
     ArrayList<Integer> monthCountList = new ArrayList<>();    
     ArrayList<Integer> eventCountList = new ArrayList<>();
 
-    int showTeamIdx;    
-    String showTeamName="";
-    String teamIdxParam = request.getParameter("teamIdx");
-    String teamNameParam = request.getParameter("teamName");
-    
-    if (teamIdxParam != null && !teamIdxParam.isEmpty() && !"null".equals(teamIdxParam)) {
-        showTeamIdx = Integer.parseInt(teamIdxParam);
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10","Sohyunxxi","1234");
-        String sql = "SELECT name FROM user WHERE user_idx=?";
-        PreparedStatement query = connect.prepareStatement(sql);
-        query.setInt(1, showTeamIdx);
-        ResultSet result = query.executeQuery();
-
-        if(result.next()){
-            showTeamName=result.getString(1);
+        int showTeamIdx = 0;
+        String showTeamName = "";
+        
+        Integer sessionTeamIdx = (Integer)session.getAttribute("teamIdx");
+        if (sessionTeamIdx != null) {
+            showTeamIdx = sessionTeamIdx;
         }
-    }else{
-        showTeamIdx=0;
-    }
+        
+        String sessionTeamName = (String)session.getAttribute("teamName");
+        if (sessionTeamName != null) {
+            showTeamName = sessionTeamName;
+        }
+  
        
     if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx <= 0 || String.valueOf(idx).trim().isEmpty()) {      
         response.sendRedirect("login.jsp");
@@ -319,8 +312,17 @@
     }
 
     function changeUser(num,name){
+        location.href="../action/setTeamAction.jsp?teamIdx="+num+"&teamName="+name;
+    }
 
-        location.href="mainCalendar.jsp?teamIdx="+num+"&teamName="+name;
+
+    function removeTeamIdx(num) {
+        var name = "";
+        console.log("Removing team info: " + num);
+
+        // 숨기고 싶은 span 요소들을 ID를 사용하여 가져옴
+
+        location.href = "../action/deleteTeamSessionAction.jsp";
     }
 
     function daysOfMonthEvent(button) {
@@ -334,32 +336,6 @@
             day = 30;
         }
         changeButtonColor(button);
-    }
-
-    function removeTeamIdx(num) {
-        var name = "";
-        console.log("Removing team info: " + num);
-
-        // 숨기고 싶은 span 요소들을 ID를 사용하여 가져옴
-        var readingTeamInfo1 = document.getElementById("readingTeamInfo1");
-        var readingTeamInfo2 = document.getElementById("readingTeamInfo2");
-        var readingTeamInfo3 = document.getElementById("readingTeamInfo3");
-
-        // 디버깅을 위한 로그 출력
-        console.log("Info 1: " + readingTeamInfo1);
-        console.log("Info 2: " + readingTeamInfo2);
-        console.log("Info 3: " + readingTeamInfo3);
-
-        // 숨김 처리
-        if (readingTeamInfo1 && readingTeamInfo2 && readingTeamInfo3) {
-            readingTeamInfo1.style.display = "none";
-            readingTeamInfo2.style.display = "none";
-            readingTeamInfo3.style.display = "none";
-            console.log("Elements hidden successfully.");
-        } else {
-            console.log("Some elements not found.");
-        }
-        location.href = "mainCalendar.jsp";
     }
 
     function changeButtonColor(button) {
@@ -385,7 +361,6 @@
     // 폼 생성
         sessionStorage.setItem("month",month);
         console.log("달: "+ <%=month%>);
-        //location.href="mainCalendar.jsp";
     }
 
     function presentMonth() {//백엔드에서 처리하기
@@ -712,6 +687,11 @@
         form.submit();
         }
         // 모든 조건을 만족하면 submit을 계속 진행
+        reloadMain();
+    }
+    function reloadMain(){
+        window.location.reload();
+
     }
 
 </script>
