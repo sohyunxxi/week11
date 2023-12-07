@@ -8,12 +8,7 @@
 <%
     request.setCharacterEncoding("utf-8");
     String name = (String)session.getAttribute("userName");
-    String id = (String)session.getAttribute("userId");
-    String pw = (String)session.getAttribute("userPw");
-    String role = (String)session.getAttribute("role");
-    String team =(String)session.getAttribute("team");
-    String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
+
 //try catch 넣기
 
     if (name != null){
@@ -48,26 +43,32 @@
     <form action="../action/makeAccountAction.jsp" >
         <div id="loginBox">
             <div class="insertBox">
-                <span id="nameFont" class="fontSize">이름 : </span>
-                <input id="nameBox" placeholder="필수 입력 사항입니다." name="name" type="text" length="14" maxlength="12">
+                <span id="nameFont" class="fontSize" >이름 : </span>
+                <input id="nameBox" placeholder="필수 입력 사항입니다." name="name" type="text" maxlength="12" onchange="validName()">
+                <span id="validName"></span>
             </div>
             <div class="insertBox" id="idAppendBox">
                 <span id="idFont" class="fontSize">아이디 : </span>
-                <input id="idBox" placeholder="4~10자리 사이" name="id" type="text" length="18" maxlength="16">
+                <input id="idBox" placeholder="4~10자리 사이" name="id" type="text" length="18" maxlength="16"  onchange="validId()">
+                <span id="validId"></span>
+
                 <button type="button" id="checkButton" onclick="checkIdDuplicate()">중복확인</button>
                 <input type="hidden" name="idDuplication" id="idDuplicationCheck" value="unchecked">
             </div>
             <div class="insertBox">
                 <span class="fontSize">비밀번호 : </span>
-                <input id="pwBox" placeholder="4~16자리 사이" name="pw" type="password" length="18" maxlength="16">
+                <input id="pwBox" placeholder="4~16자리 사이" name="pw" type="password" length="18" maxlength="16" onchange="validPw()">
+                <span id="validPw"></span>
             </div>
             <div class="insertBox">
                 <span class="fontSize">재확인 비밀번호 : </span>
-                <input id="comfirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16">
+                <input id="comfirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16" onchange="validConfirmPw()">
+                <span id="validConfirmPw"></span>
             </div>
             <div class="insertBox">
                 <span class="fontSize">전화번호 : </span>
-                <input id="numBox" placeholder="(-) 없이 입력해주세요." name="tel" type="text" length="18" maxlength="16">
+                <input id="numBox" placeholder="(-) 없이 입력해주세요." name="tel" type="text" length="18" maxlength="16" onchange="validTel()">
+                <span id="validTel"></span> 
             </div>
             <div class="insertBox">
                 <span id="selectTeam" class="fontSize">부서명 : </span>
@@ -96,6 +97,62 @@
         <button id="useIdButton" onclick="useIdEvent()">아이디 사용하기</button>
     </div>
     <script src="../js/makeAccount.js"></script>
+    <script>
+        function validName() {    
+    var nameInput = document.getElementById('nameBox'); 
+    var nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
+    
+    if (nameRegex.test(nameInput.value)) {
+        document.getElementById("validName").innerHTML = "";
+    } else {
+        document.getElementById("validName").innerHTML = "이름은 영어나 한글로 2자리 이상 50자리 이하로 작성해 주세요.";
+    }
+}
+function validId(){
+    var idInput = document.getElementById('idBox');
+    var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;
+    if ((idRegex).test(idInput)) {
+        
+        document.getElementById("validId").innerHTML = "";
+    } else {
+      
+        document.getElementById("validId").innerHTML = "아이디는 6자리 이상 12자리 이하, 영어와 숫자 조합으로 작성해 주세요.";
+    }
+}
+function validPw(){
+    var password = document.getElementById('pwBox').value;
+    var pwRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>])\S{6,16}$/
+    if ((pwRegex).test(password)) {
+        // 유효한 비밀번호인 경우
+        document.getElementById("validPw").innerHTML = "";
+    } else {
+        // 유효하지 않은 비밀번호인 경우
+        document.getElementById("validPw").innerHTML = "비밀번호는 6자리 이상 16자리 이하, 영어와 숫자 특수문자 조합으로 작성해 주십시오.";
+    }
+}
+function validConfirmPw(){    
+    var confirmPassword = document.getElementById('confirmPwBox').value;
+    var pwRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>])\S{6,16}$/
+    if ((pwRegex).test(confirmPassword)) {
+        // 유효한 비밀번호인 경우
+        document.getElementById("validConfirmPw").innerHTML = "";
+    } else {
+        // 유효하지 않은 비밀번호인 경우
+        document.getElementById("validConfirmPw").innerHTML = "비밀번호는 6자리 이상 16자리 이하, 영어와 숫자 특수문자 조합으로 작성해 주십시오.";
+    }
+}
+function validTel(){
+    var numInput = document.getElementById('numBox');
+    var phoneNumberRegex = /^\d+$/; 
+    if ((pwRegex).test(password)) {
+        // 유효한 비밀번호인 경우
+        document.getElementById("validTel").innerHTML = "";
+    } else {
+        // 유효하지 않은 비밀번호인 경우
+        document.getElementById("validTel").innerHTML = "전화번호는 11자리 숫자로만 입력해 주세요.";
+    }
+}
+    </script>
 </body>
 
 </html>

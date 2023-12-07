@@ -264,3 +264,4 @@ function selectTeam(value) {
     var team = value;
     console.log('Selected Team:', team);
 }
+
