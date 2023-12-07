@@ -23,6 +23,7 @@
         String eventContent = request.getParameter("planText");
         String startTime = request.getParameter("planTime");
         String startDate = request.getParameter("hiddenDate");
+        int hiddenIdx = Integer.parseInt(request.getParameter("hiddenIdx"));
 
         out.println("eventContent: " + eventContent);
         out.println("startTime: " + startTime);
@@ -33,7 +34,12 @@
 
         String sql = "INSERT INTO event (user_idx, event_content, start_time) VALUES (?, ?, ?)";
         PreparedStatement query = connect.prepareStatement(sql);
-
+       if(hiddenIdx==idx){
+        query.setInt(1, idx);
+       }
+       else{
+        out.println("다른 사람의 일정을 추가할 수 없습니다.");
+    }
         query.setInt(1, idx);
         query.setString(2, eventContent);
         Timestamp timestamp = Timestamp.valueOf(startDate + " " + startTime + ":00");

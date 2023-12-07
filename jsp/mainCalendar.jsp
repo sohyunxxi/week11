@@ -544,6 +544,7 @@
                         <span>일정 내용</span>
                         <input type="text" id="planText" name="planText" placeholder = '최대 50자까지 적을 수 있습니다. '>
                         <input type="hidden" id="hiddenDate" name="hiddenDate">
+                        <input type="hidden" id="hiddenIdx" name="hiddenIdx">
                     </div>
                     <button id="planButton" type="button">등록</button>
                 </form>
@@ -684,10 +685,13 @@
             var hiddenDate=modalWindow.document.getElementById("hiddenDate");
             hiddenDate.value=modalCompareDate;
             console.log(dayList);
-        if(showTeamIdx!=idx){
-            var form = modalWindow.document.getElementById("insertPlanForm");
-            form.style.display="none";
-        }
+            if(showTeamIdx!=0){
+                if(showTeamIdx!=idx){
+                var form = modalWindow.document.getElementById("insertPlanForm");
+                form.style.display="none";
+                }
+            }
+        
 
     }
 
@@ -695,6 +699,8 @@
         // 입력값 가져오기
         var planText = modalWindow.document.getElementById("planText").value;
         var planTime = modalWindow.document.getElementById("planTime").value;
+        var hiddenIdx = modalWindow.document.getElementById("hiddenIdx");
+        hiddenIdx.value = showTeamIdx;
         // 필요한 경우 여기에 추가적인 입력값 확인을 할 수 있습니다.
         // 조건을 만족하지 않으면 알림을 띄우고 submit을 중지
         if (!planText || !planTime) {
