@@ -33,7 +33,7 @@
     ArrayList<Integer> monthCountList = new ArrayList<>();    
     ArrayList<Integer> eventCountList = new ArrayList<>();
 
-    int showTeamIdx;
+    int showTeamIdx;    
     String showTeamName="";
     String teamIdxParam = request.getParameter("teamIdx");
     String teamNameParam = request.getParameter("teamName");
@@ -249,6 +249,7 @@
     </div>
 
 <script>
+    //팀IDX가 있을때, 컬러 바꾸기
     
     var day = 0;
     var selectedButton = null;
@@ -263,13 +264,14 @@
     var showTeamName="<%=showTeamName%>";
     var showMonthCount=<%=monthCountList%>;    
     var showEventCount=<%=eventCountList%>;
+    var idx=<%=idx%>;
 
     // 팀원 목록을 동적으로 생성하여 추가
     var teamList = document.getElementById("insertNext");
     console.log(idList);
     console.log(nameList);
     console.log(role);
-    console.log(showTeamIdx);
+    console.log("팀원: "+showTeamIdx);
     console.log(showMonthCount);
     console.log(showEventCount);
 
@@ -280,13 +282,11 @@
     console.log(showTeamIdx);
 
     if (showTeamIdx >= 1) {
-        var readingTeamInfo1 = document.getElementById("readingTeamInfo1");
-        var readingTeamInfo3 = document.getElementById("readingTeamInfo3");
-
         var readingTeamInfo2 = document.getElementById("readingTeamInfo2");
         readingTeamInfo2.innerText = showTeamName;
-
+       
     }
+    
     else{
         var onlyLeader=document.getElementById("onlyLeader");
         onlyLeader.style.display="none";
@@ -319,7 +319,7 @@
     }
 
     function changeUser(num,name){
-        console.log(num);
+
         location.href="mainCalendar.jsp?teamIdx="+num+"&teamName="+name;
     }
 
@@ -387,6 +387,7 @@
         console.log("달: "+ <%=month%>);
         //location.href="mainCalendar.jsp";
     }
+
     function presentMonth() {//백엔드에서 처리하기
         var month = <%=month%>;
         // 아래와 같이 수정하여 버튼 객체를 만들어서 전달
@@ -444,9 +445,10 @@
             dayBox.setAttribute("onclick", "openModalEvent("+ <%=year%>+"," + selectedMonth + "," + (i + 1) + ")");
             dayBox.textContent = i + 1;
             days.appendChild(dayBox);
-            for(var j=1;j<=showMonthCount.length;j++){
-                if(i==showMonthCount[j]){
+            for(var j=0;j<=showMonthCount.length;j++){
+                if(i+1==showMonthCount[j]){
                 var count=document.createElement("span");
+                count.className="countFont";
                 if(showEventCount>8){
                     count.innerText="+9";
                 }
@@ -531,9 +533,9 @@
                 <div id="planBox">
                 </div>
                 <hr>
-                <h3>일정 추가</h3>
-                <hr>
                 <form action="../action/insertPlanAction.jsp" id="insertPlanForm">
+                    <h3>일정 추가</h3>
+                    <hr>
                     <div id="modalTimeBox">
                         <span>일정 시간</span>
                         <input type="time" id="planTime" name="planTime">
@@ -543,7 +545,7 @@
                         <input type="text" id="planText" name="planText" placeholder = '최대 50자까지 적을 수 있습니다. '>
                         <input type="hidden" id="hiddenDate" name="hiddenDate">
                     </div>
-                    <button id="planButton" type="button" >등록</button>
+                    <button id="planButton" type="button">등록</button>
                 </form>
             </div>
 
@@ -652,6 +654,8 @@
                 deleteButton.id="deleteButton";
                 updateButton.innerText="수정";
                 deleteButton.innerText="삭제";
+               
+           
             }
             spanTime.id="spanTime";
             spanContent.id="spanContent";
@@ -675,13 +679,16 @@
             var planBox =  modalWindow.document.getElementById("planBox");
             planBox.appendChild(div);
         }
-        if(showTeamIdx==0){
-            var planButton = modalWindow.document.getElementById("planButton");
-            planButton.onclick = function() {checkInsertPlanEvent(modalWindow);};
+        var planButton = modalWindow.document.getElementById("planButton");
+        planButton.onclick = function() {checkInsertPlanEvent(modalWindow);};
             var hiddenDate=modalWindow.document.getElementById("hiddenDate");
             hiddenDate.value=modalCompareDate;
             console.log(dayList);
+        if(showTeamIdx!=idx){
+            var form = modalWindow.document.getElementById("insertPlanForm");
+            form.style.display="none";
         }
+
     }
 
     function checkInsertPlanEvent(modalWindow) {
