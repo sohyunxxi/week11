@@ -45,30 +45,30 @@
             <div class="insertBox">
                 <span id="nameFont" class="fontSize" >이름 : </span>
                 <input id="nameBox" placeholder="필수 입력 사항입니다." name="name" type="text" maxlength="12" onchange="validName()">
-                <span id="validName"></span>
+                <span id="validName" class="validFontInfo"></span>
             </div>
             <div class="insertBox" id="idAppendBox">
                 <span id="idFont" class="fontSize">아이디 : </span>
                 <input id="idBox" placeholder="4~10자리 사이" name="id" type="text" length="18" maxlength="16"  onchange="validId()">
-                <span id="validId"></span>
+                <span id="validId" class="validFontInfo"></span>
 
                 <button type="button" id="checkButton" onclick="checkIdDuplicate()">중복확인</button>
-                <input type="hidden" name="idDuplication" id="idDuplicationCheck" value="unchecked">
+                <input type="hidden" name="idDuplication" id="idDuplicationCheck" value="unchecked" >
             </div>
             <div class="insertBox">
                 <span class="fontSize">비밀번호 : </span>
                 <input id="pwBox" placeholder="4~16자리 사이" name="pw" type="password" length="18" maxlength="16" onchange="validPw()">
-                <span id="validPw"></span>
+                <span id="validPw" class="validFontInfo"></span>
             </div>
             <div class="insertBox">
                 <span class="fontSize">재확인 비밀번호 : </span>
                 <input id="confirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16" onchange="validConfirmPw()">
-                <span id="validConfirmPw"></span>
+                <span id="validConfirmPw" class="validFontInfo"></span>
             </div>
             <div class="insertBox">
                 <span class="fontSize">전화번호 : </span>
                 <input id="numBox" placeholder="(-) 없이 입력해주세요." name="tel" type="text" length="18" maxlength="16" onchange="validTel()">
-                <span id="validTel"></span> 
+                <span id="validTel" class="validFontInfo"></span> 
             </div>
             <div class="insertBox">
                 <span id="selectTeam" class="fontSize">부서명 : </span>

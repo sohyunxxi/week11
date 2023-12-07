@@ -146,7 +146,7 @@ function checkNoInput() {
     var nameInput = document.getElementById('nameBox');
     var idInput = document.getElementById('idBox');
     var pwInput = document.getElementById('pwBox');
-    var confirmPwInput = document.getElementById('comfirmPwBox');
+    var confirmPwInput = document.getElementById('confirmPwBox');
     var numInput = document.getElementById('numBox');
     var teamInputs = document.querySelectorAll('input[name="team"]');
     var companyInputs = document.querySelectorAll('input[name="company"]');

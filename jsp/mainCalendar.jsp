@@ -537,12 +537,14 @@
         doAdditionalWork(selectYear, selectedMonth, selectDay,modalWindow);
     }
 
-    function updatePlanEvent(modalWindow) {
-        var eventSpan = modalWindow.document.getElementById("spanContent");
-        var timeSpan = modalWindow.document.getElementById("spanTime");
-        var editButton = modalWindow.document.getElementById("updateButton");
+    function updatePlanEvent(modalWindow,i) {
+        console.log(i);
+        var eventSpan = modalWindow.document.getElementById("spanContent"+i);
+        var timeSpan = modalWindow.document.getElementById("spanTime"+i);
+        var editButton = modalWindow.document.getElementById("updateButton"+i);
         var currentEvent = eventSpan.innerText;
-        var eventIdx = modalWindow.document.getElementById("eventIdxInput").value;
+        console.log(currentEvent);
+        var eventIdx = modalWindow.document.getElementById("eventIdxInput"+i).value;
         var planInput= modalWindow.document.createElement('input');
         var timeInput= modalWindow.document.createElement('input');
 
@@ -555,8 +557,8 @@
             timeInput.id="timeInput";
             timeInput.value = timeSpan.innerText;
             planInput.name = "planInputName";
-            var planAppendBox = modalWindow.document.getElementById("spanContentInfo");
-            var timeAppendBox = modalWindow.document.getElementById("spanTimeInfo");
+            var planAppendBox = modalWindow.document.getElementById("spanContentInfo"+i);
+            var timeAppendBox = modalWindow.document.getElementById("spanTimeInfo"+i);
             planAppendBox.appendChild(planInput);
             timeAppendBox.appendChild(timeInput);
             timeSpan.style.display='none';
@@ -587,8 +589,8 @@
         }
     }
 
-    function deletePlanEvent(modalWindow) {
-        var eventIdx = modalWindow.document.getElementById("eventIdxInput").value;
+    function deletePlanEvent(modalWindow,i) {
+        var eventIdx = modalWindow.document.getElementById("eventIdxInput"+i).value;
         location.href = '../action/deletePlanAction.jsp?eventIdx=' + eventIdx;
     }
 
@@ -627,37 +629,37 @@
             var deleteButton = document.createElement("button");
             if(showTeamIdx==0){
                
-                updateButton.onclick = function() { updatePlanEvent(modalWindow); };
-                deleteButton.onclick = function() {deletePlanEvent(modalWindow);};
-                updateButton.id="updateButton";
-                deleteButton.id="deleteButton";
+                (function(index) {
+            updateButton.onclick = function() { updatePlanEvent(modalWindow, index); };
+            deleteButton.onclick = function() { deletePlanEvent(modalWindow, index); };
+        })(i);
+                updateButton.id="updateButton"+i;
+                deleteButton.id="deleteButton"+i;
                 updateButton.innerText="수정";
                 deleteButton.innerText="삭제";
-
+               
+           
             }
             var spanTimeInfo = document.createElement("span");
               
-            spanTime.id="spanTime";
-            spanContent.id="spanContent";
+            spanTime.id="spanTime"+i;
+            spanContent.id="spanContent"+i;
             spanTimeInfo.innerText =  "일정시간";
             spanContentInfo.innerText = "일정내용";
-            spanTimeInfo.id =  "spanTimeInfo";
-            spanContentInfo.id = "spanContentInfo";
+            spanTimeInfo.id =  "spanTimeInfo"+i;
+            spanContentInfo.id = "spanContentInfo"+i;
             hidden.type = "hidden";
-            hidden.name = "eventIdx"; // name 속성 추가
+            hidden.name = "eventIdx"+i; // name 속성 추가
             hidden.value = eventIdx[matchingIndices[i]]; // 특정 인덱스 사용
-            hidden.id = "eventIdxInput"; 
+            hidden.id = "eventIdxInput"+i; 
             spanTime.innerText =  timeList[matchingIndices[i]] 
             spanContent.innerText = eventList[matchingIndices[i]];
             div.appendChild(spanTimeInfo);
             div.appendChild(spanTime);
             div.appendChild(spanContentInfo);
             div.appendChild(spanContent);
-            if(showTeamIdx==0){
-                div.appendChild(updateButton);
-                div.appendChild(deleteButton);
-            }
-
+            div.appendChild(updateButton);
+            div.appendChild(deleteButton);
             div.appendChild(hidden);
             var planBox =  modalWindow.document.getElementById("planBox");
             planBox.appendChild(div);

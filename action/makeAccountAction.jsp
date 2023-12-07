@@ -23,8 +23,6 @@
     if   (username == null || idValue == null || pwValue == null || tel == null) {
         out.println("<p>입력값이 부족합니다.</p>");
     } else {
-        // 여기서 추가적인 유효성 검사를 수행합니다.
-        // 여기서 추가적인 유효성 검사를 수행합니다.
         if (!(username.matches("^[a-zA-Z가-힣]{2,50}$"))) {
             out.println("<p>이름은 2글자 이상 50글자 이내의 한글 또는 영어만 가능합니다.</p>");
         } else if (!(idValue.matches("^[a-zA-Z0-9]{6,12}$"))) {
@@ -66,6 +64,7 @@
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                out.println("회원가입에 실패하였습니다. 관리자에게 연락해 주세요.");
             }
         }
     }
@@ -75,7 +74,7 @@
 <body>
     <% if (accountSet < 0) { %>
         <script>
-            //alert("회원가입에 실패하였습니다. 조건을 다시 잘 확인하고 작성해 주세요.");
+            alert("회원가입에 실패하였습니다. 조건을 다시 잘 확인하고 작성해 주세요.");
             history.back();
         </script>
     <% } else if (accountSet > 0) { %>
