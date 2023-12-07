@@ -612,6 +612,9 @@
         console.log(timeList);
         var eventList = <%=eventList%>;
         var eventIdx = <%=eventIdx%>;
+        console.log("팀원시간리스트"+timeList);
+        console.log("팀원일정"+eventList);
+
             
         for (var i = 0; i < matchingIndices.length; i++) {
             console.log(matchingIndices);
@@ -620,19 +623,20 @@
             var spanContentInfo = document.createElement("span");
             var spanTime = document.createElement("span");
             var hidden = document.createElement("input");
+            var updateButton = document.createElement("button");
+            var deleteButton = document.createElement("button");
             if(showTeamIdx==0){
-                var spanTimeInfo = document.createElement("span");
-                var updateButton = document.createElement("button");
-                var deleteButton = document.createElement("button");
+               
                 updateButton.onclick = function() { updatePlanEvent(modalWindow); };
                 deleteButton.onclick = function() {deletePlanEvent(modalWindow);};
                 updateButton.id="updateButton";
                 deleteButton.id="deleteButton";
                 updateButton.innerText="수정";
                 deleteButton.innerText="삭제";
-               
-           
+
             }
+            var spanTimeInfo = document.createElement("span");
+              
             spanTime.id="spanTime";
             spanContent.id="spanContent";
             spanTimeInfo.innerText =  "일정시간";
@@ -649,8 +653,11 @@
             div.appendChild(spanTime);
             div.appendChild(spanContentInfo);
             div.appendChild(spanContent);
-            div.appendChild(updateButton);
-            div.appendChild(deleteButton);
+            if(showTeamIdx==0){
+                div.appendChild(updateButton);
+                div.appendChild(deleteButton);
+            }
+
             div.appendChild(hidden);
             var planBox =  modalWindow.document.getElementById("planBox");
             planBox.appendChild(div);
