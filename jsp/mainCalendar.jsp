@@ -22,7 +22,6 @@
     int month = (Integer)session.getAttribute("month");
     int day = (Integer)session.getAttribute("day");
 
-
     ArrayList<String> nameList= new ArrayList<String>();
     ArrayList<String> idList= new ArrayList<String>();
     ArrayList<Integer> idxTeamList= new ArrayList<Integer>();
@@ -33,8 +32,6 @@
     ArrayList<Integer> eventIdx = new ArrayList<>();
     ArrayList<Integer> monthCountList = new ArrayList<>();    
     ArrayList<Integer> eventCountList = new ArrayList<>();
-
-
 
     int showTeamIdx;
     String showTeamName="";
@@ -53,15 +50,13 @@
         if(result.next()){
             showTeamName=result.getString(1);
         }
-    }
-    else{
+    }else{
         showTeamIdx=0;
     }
        
     if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx <= 0 || String.valueOf(idx).trim().isEmpty()) {      
         response.sendRedirect("login.jsp");
-    }
-    else{
+    }else{
         Class.forName("com.mysql.jdbc.Driver");
         Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10","Sohyunxxi","1234");
         if ("팀장".equals(role)){
@@ -112,9 +107,8 @@
                 dayList.add("\"" + formattedTimeDay + "\"");
                 eventList.add("\"" + e_eventContent + "\"");
         
-                }   
-            }
-        else{
+            }   
+        }else{
             
             //해당 달에 해당하는 이벤트만 가져오기
             String eventSql = "SELECT event_idx, start_time, event_content FROM event WHERE user_idx = ? AND YEAR(start_time) = ? AND MONTH(start_time) = ? " +
@@ -144,9 +138,9 @@
                 timeList.add("\"" + formattedTime + "\"");
                 dayList.add("\"" + formattedTimeDay + "\"");
                 eventList.add("\"" + e_eventContent + "\"");
-            
                 }   
             }
+
         if(showTeamIdx>1){
             String sql = "SELECT DAY(start_time) AS event_day, COUNT(*) AS event_count FROM event WHERE YEAR(start_time) = ?"
             +" AND MONTH(start_time) = ? AND user_idx =? GROUP BY DAY(start_time) ORDER BY event_day";
@@ -162,8 +156,8 @@
             monthCountList.add(monthCount);
             eventCountList.add(eventCount);
             }
-        }
-    else{
+
+        } else{
             String sql = "SELECT DAY(start_time) AS event_day, COUNT(*) AS event_count FROM event WHERE YEAR(start_time) = ?"
             +" AND MONTH(start_time) = ? AND user_idx =? GROUP BY DAY(start_time) ORDER BY event_day";
             PreparedStatement Query = connect.prepareStatement(sql);
@@ -366,9 +360,7 @@
             console.log("Some elements not found.");
         }
         location.href = "mainCalendar.jsp";
-}
-
-
+    }
 
     function changeButtonColor(button) {
 
@@ -462,14 +454,11 @@
                     count.innerText=showEventCount[j];
                     dayBox.appendChild(count);
                 }
-                
+                }
             }
-            }
-           
             if ((i + 1) % 7 == 0) {
                 days.appendChild(document.createElement("br"));
             }
-
         }
     }
 
@@ -490,7 +479,6 @@
     //event 붙이기
     function closeModalEvent() {
         var planBox = document.getElementById("planBox");
-
         // 모든 modalPlan 클래스를 가진 요소를 제거
         var modalPlans = planBox.getElementsByClassName("modalPlan");
         while (modalPlans.length > 0) {
@@ -498,19 +486,13 @@
         }
         var modal = document.getElementById('modal');
         modal.style.display = 'none';
-
-
-
     }
-
 
     function timeBack(unit) {
         var numElement = document.querySelector('.modalTimeNum.' + unit);
         var hiddenInputElement = document.querySelector('input[name=' + unit + 'Hidden]');
-
         if (numElement && hiddenInputElement) {
             var currentNum = parseInt(numElement.textContent);
-
             if (currentNum > 0) {
                 numElement.textContent = (currentNum - 1).toString().padStart(2, '0');
                 hiddenInputElement.value = numElement.textContent;
@@ -521,7 +503,6 @@
     function timeFront(unit) {
         var numElement = document.querySelector('.modalTimeNum.' + unit);
         var hiddenInputElement = document.querySelector('input[name=' + unit + 'Hidden]');
-
         if (numElement && hiddenInputElement) {
             var currentNum = parseInt(numElement.textContent);
             if (unit === 'hour' && currentNum < 23) {
@@ -534,35 +515,28 @@
         }
     }
 
-
     function openModalEvent(selectYear, selectedMonth, selectDay) {
-
-
         // 새 창 열기
         var modalWindow = window.open('', '_blank', 'width=600, height=400, resizable=yes');
-
         // 모달 내용 생성
         var modalContent = `
         <div id="modal">
-
-            <div id="innerModal">
-               
-                    <div id="innerDiv" ></div>
-                    <input type="hidden" id="eventDate" name="eventDate" value="날짜">
+            <div id="innerModal">         
+                <div id="innerDiv" ></div>
+                <input type="hidden" id="eventDate" name="eventDate" value="날짜">
                 <span id="planCount"></span>
                 <hr>
                 <span>일정 리스트</span>
                 <hr>
                 <div id="planBox">
-                
                 </div>
                 <hr>
                 <h3>일정 추가</h3>
                 <hr>
-            <form action="../action/insertPlanAction.jsp" id="insertPlanForm">
+                <form action="../action/insertPlanAction.jsp" id="insertPlanForm">
                     <div id="modalTimeBox">
                         <span>일정 시간</span>
-                      <input type="time" id="planTime" name="planTime">
+                        <input type="time" id="planTime" name="planTime">
                     </div>
                     <div id="planInputBox">
                         <span>일정 내용</span>
@@ -570,10 +544,9 @@
                         <input type="hidden" id="hiddenDate" name="hiddenDate">
                     </div>
                     <button id="planButton" type="button" >등록</button>
-                    </form>
+                </form>
             </div>
 
-        </div>
         </div>
         `;
         modalWindow.document.body.innerHTML = modalContent;
@@ -584,67 +557,62 @@
         modalWindow.document.getElementById('innerDiv').appendChild(spanElement);
       
         doAdditionalWork(selectYear, selectedMonth, selectDay,modalWindow);
-    
-}
-
-function updatePlanEvent(modalWindow) {
-    var eventSpan = modalWindow.document.getElementById("spanContent");
-    var timeSpan = modalWindow.document.getElementById("spanTime");
-    var editButton = modalWindow.document.getElementById("updateButton");
-    var currentEvent = eventSpan.innerText;
-    var eventIdx = modalWindow.document.getElementById("eventIdxInput").value;
-    var planInput= modalWindow.document.createElement('input');
-    var timeInput= modalWindow.document.createElement('input');
-
-    if (editButton.textContent === '수정') {
-        planInput.classList = 'planInput';
-        planInput.placeholder = '최대 50자까지 적을 수 있습니다. ';
-        planInput.maxLength = '50';
-        planInput.value = currentEvent;
-        timeInput.type="time";
-        timeInput.id="timeInput";
-        timeInput.value = timeSpan.innerText;
-        planInput.name = "planInputName";
-        var planAppendBox = modalWindow.document.getElementById("spanContentInfo");
-        var timeAppendBox = modalWindow.document.getElementById("spanTimeInfo");
-        planAppendBox.appendChild(planInput);
-        timeAppendBox.appendChild(timeInput);
-        timeSpan.style.display='none';
-        eventSpan.style.display = 'none';
-        editButton.textContent = '저장';
-        console.log(modalCompareDate);
-    } else {
-        // 수정한 값을 updatePlanAction에 넘김.
-        planInput = modalWindow.document.querySelector('.planInput');
-        timeInput = modalWindow.document.getElementById('timeInput');
-
-        if(planInput.value==null||planInput.value==""){
-            alert("일정을 작성해 주세요!");
-        }
-        else{
-            editButton.textContent = '수정';
-            eventSpan.style.display = 'block';
-            timeSpan.style.display = 'block';
-
-            eventSpan.textContent = planInput.value; // 수정한 값을 span에 저장
-            timeSpan.textContent = timeInput.value; // 수정한 값을 span에 저장
-
-            planInput.remove(); // input 엘리먼트 제거
-            timeInput.remove();
-            location.href = '../action/updatePlanAction.jsp?eventIdx=' + eventIdx + '&planContext=' + planInput.value+'&planTime='+timeInput.value+'&planDate='+modalCompareDate;
-
-        }
-      
     }
-}
 
+    function updatePlanEvent(modalWindow) {
+        var eventSpan = modalWindow.document.getElementById("spanContent");
+        var timeSpan = modalWindow.document.getElementById("spanTime");
+        var editButton = modalWindow.document.getElementById("updateButton");
+        var currentEvent = eventSpan.innerText;
+        var eventIdx = modalWindow.document.getElementById("eventIdxInput").value;
+        var planInput= modalWindow.document.createElement('input');
+        var timeInput= modalWindow.document.createElement('input');
 
+        if (editButton.textContent === '수정') {
+            planInput.classList = 'planInput';
+            planInput.placeholder = '최대 50자까지 적을 수 있습니다. ';
+            planInput.maxLength = '50';
+            planInput.value = currentEvent;
+            timeInput.type="time";
+            timeInput.id="timeInput";
+            timeInput.value = timeSpan.innerText;
+            planInput.name = "planInputName";
+            var planAppendBox = modalWindow.document.getElementById("spanContentInfo");
+            var timeAppendBox = modalWindow.document.getElementById("spanTimeInfo");
+            planAppendBox.appendChild(planInput);
+            timeAppendBox.appendChild(timeInput);
+            timeSpan.style.display='none';
+            eventSpan.style.display = 'none';
+            editButton.textContent = '저장';
+            console.log(modalCompareDate);
+        } else {
+            // 수정한 값을 updatePlanAction에 넘김.
+            planInput = modalWindow.document.querySelector('.planInput');
+            timeInput = modalWindow.document.getElementById('timeInput');
+
+            if(planInput.value==null||planInput.value==""){
+                alert("일정을 작성해 주세요!");
+            }
+            else{
+                editButton.textContent = '수정';
+                eventSpan.style.display = 'block';
+                timeSpan.style.display = 'block';
+
+                eventSpan.textContent = planInput.value; // 수정한 값을 span에 저장
+                timeSpan.textContent = timeInput.value; // 수정한 값을 span에 저장
+
+                planInput.remove(); // input 엘리먼트 제거
+                timeInput.remove();
+                location.href = '../action/updatePlanAction.jsp?eventIdx=' + eventIdx + '&planContext=' + planInput.value+'&planTime='+timeInput.value+'&planDate='+modalCompareDate;
+
+            }
+        }
+    }
 
     function deletePlanEvent(modalWindow) {
         var eventIdx = modalWindow.document.getElementById("eventIdxInput").value;
         location.href = '../action/deletePlanAction.jsp?eventIdx=' + eventIdx;
     }
-
 
     function doAdditionalWork(selectYear,selectedMonth,selectDay,modalWindow) {
         const formattedMonth = String(selectedMonth).padStart(2, '0');
@@ -654,26 +622,18 @@ function updatePlanEvent(modalWindow) {
         modalCompareDate = 2023+"-"+formattedMonth+"-"+formattedDay;
         console.log(selectDay);
         console.log(modalCompareDate);
-
         var dayList = <%=dayList%>;
-
         for (var i = 0; i < dayList.length; i++) {
                 console.log(modalCompareDate == dayList[i]);
                 if (modalCompareDate == dayList[i]) {
                     matchingIndices.push(i);
                 }
-            }
-        console.log(matchingIndices);
-            
+        }
+        console.log(matchingIndices);  
         var timeList = <%=timeList%>;
         console.log(timeList);
         var eventList = <%=eventList%>;
         var eventIdx = <%=eventIdx%>;
-
-        //     var modalDate = document.getElementById("eventDate");
-            //console.log(modalCompareDate);
-
-
             
         for (var i = 0; i < matchingIndices.length; i++) {
             console.log(matchingIndices);
@@ -686,32 +646,23 @@ function updatePlanEvent(modalWindow) {
                 var spanTimeInfo = document.createElement("span");
                 var updateButton = document.createElement("button");
                 var deleteButton = document.createElement("button");
-                updateButton.onclick = function() {
-                updatePlanEvent(modalWindow);
-            };
-
-            deleteButton.onclick = function() {
-                deletePlanEvent(modalWindow);
-            };
-            updateButton.id="updateButton";
-            deleteButton.id="deleteButton";
-            updateButton.innerText="수정";
-            deleteButton.innerText="삭제";
+                updateButton.onclick = function() { updatePlanEvent(modalWindow); };
+                deleteButton.onclick = function() {deletePlanEvent(modalWindow);};
+                updateButton.id="updateButton";
+                deleteButton.id="deleteButton";
+                updateButton.innerText="수정";
+                deleteButton.innerText="삭제";
             }
-      
             spanTime.id="spanTime";
             spanContent.id="spanContent";
             spanTimeInfo.innerText =  "일정시간";
             spanContentInfo.innerText = "일정내용";
             spanTimeInfo.id =  "spanTimeInfo";
             spanContentInfo.id = "spanContentInfo";
-
             hidden.type = "hidden";
             hidden.name = "eventIdx"; // name 속성 추가
             hidden.value = eventIdx[matchingIndices[i]]; // 특정 인덱스 사용
             hidden.id = "eventIdxInput"; 
-
-
             spanTime.innerText =  timeList[matchingIndices[i]] 
             spanContent.innerText = eventList[matchingIndices[i]];
             div.appendChild(spanTimeInfo);
@@ -721,32 +672,23 @@ function updatePlanEvent(modalWindow) {
             div.appendChild(updateButton);
             div.appendChild(deleteButton);
             div.appendChild(hidden);
-
             var planBox =  modalWindow.document.getElementById("planBox");
             planBox.appendChild(div);
-
-
         }
         if(showTeamIdx==0){
             var planButton = modalWindow.document.getElementById("planButton");
-        planButton.onclick = function() {
-                checkInsertPlanEvent(modalWindow);
-            };
-        var hiddenDate=modalWindow.document.getElementById("hiddenDate");
-        hiddenDate.value=modalCompareDate;
-        console.log(dayList);
+            planButton.onclick = function() {checkInsertPlanEvent(modalWindow);};
+            var hiddenDate=modalWindow.document.getElementById("hiddenDate");
+            hiddenDate.value=modalCompareDate;
+            console.log(dayList);
         }
-      
-
     }
 
     function checkInsertPlanEvent(modalWindow) {
         // 입력값 가져오기
         var planText = modalWindow.document.getElementById("planText").value;
         var planTime = modalWindow.document.getElementById("planTime").value;
-
         // 필요한 경우 여기에 추가적인 입력값 확인을 할 수 있습니다.
-
         // 조건을 만족하지 않으면 알림을 띄우고 submit을 중지
         if (!planText || !planTime) {
             alert("일정 내용과 시간을 모두 입력해주세요.");
@@ -755,9 +697,8 @@ function updatePlanEvent(modalWindow) {
         // 모든 조건을 만족하면 form을 submit
         var form = modalWindow.document.getElementById("insertPlanForm");
         form.submit();
-    }
+        }
         // 모든 조건을 만족하면 submit을 계속 진행
-        
     }
 
 </script>
