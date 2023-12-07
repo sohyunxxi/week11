@@ -62,7 +62,7 @@
             </div>
             <div class="insertBox">
                 <span class="fontSize">재확인 비밀번호 : </span>
-                <input id="comfirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16" onchange="validConfirmPw()">
+                <input id="confirmPwBox" placeholder="4~16자리 사이" name="confirmPw" type="password" length="18" maxlength="16" onchange="validConfirmPw()">
                 <span id="validConfirmPw"></span>
             </div>
             <div class="insertBox">
@@ -98,31 +98,34 @@
     </div>
     <script src="../js/makeAccount.js"></script>
     <script>
-        function validName() {    
-    var nameInput = document.getElementById('nameBox'); 
+function validName() {
+    var nameInput = document.getElementById('nameBox');
     var nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
-    
+
     if (nameRegex.test(nameInput.value)) {
         document.getElementById("validName").innerHTML = "";
     } else {
         document.getElementById("validName").innerHTML = "이름은 영어나 한글로 2자리 이상 50자리 이하로 작성해 주세요.";
     }
 }
-function validId(){
+
+function validId() {
     var idInput = document.getElementById('idBox');
     var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;
-    if ((idRegex).test(idInput)) {
-        
+
+    if (idRegex.test(idInput.value)) {
         document.getElementById("validId").innerHTML = "";
     } else {
-      
         document.getElementById("validId").innerHTML = "아이디는 6자리 이상 12자리 이하, 영어와 숫자 조합으로 작성해 주세요.";
     }
 }
+
+// 나머지 함수도 동일한 방식으로 수정
+
 function validPw(){
-    var password = document.getElementById('pwBox').value;
+    var password = document.getElementById('pwBox');
     var pwRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>])\S{6,16}$/
-    if ((pwRegex).test(password)) {
+    if ((pwRegex).test(password.value)) {
         // 유효한 비밀번호인 경우
         document.getElementById("validPw").innerHTML = "";
     } else {
@@ -131,9 +134,9 @@ function validPw(){
     }
 }
 function validConfirmPw(){    
-    var confirmPassword = document.getElementById('confirmPwBox').value;
+    var confirmPassword = document.getElementById("confirmPwBox");
     var pwRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*(),.?":{}|<>])\S{6,16}$/
-    if ((pwRegex).test(confirmPassword)) {
+    if ((pwRegex).test(confirmPassword.value)) {
         // 유효한 비밀번호인 경우
         document.getElementById("validConfirmPw").innerHTML = "";
     } else {
@@ -144,9 +147,9 @@ function validConfirmPw(){
 function validTel(){
     var numInput = document.getElementById('numBox');
     var phoneNumberRegex = /^\d+$/; 
-    if ((pwRegex).test(password)) {
+    if ((phoneNumberRegex).test(numInput.value)) {
         // 유효한 비밀번호인 경우
-        document.getElementById("validTel").innerHTML = "";
+        document.getElementById("validTel").innerHTML = " ";
     } else {
         // 유효하지 않은 비밀번호인 경우
         document.getElementById("validTel").innerHTML = "전화번호는 11자리 숫자로만 입력해 주세요.";
