@@ -14,14 +14,21 @@
     String role = (String)session.getAttribute("role");
     String team =(String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
-    int year = (Integer)session.getAttribute("year");
-    int month = (Integer)session.getAttribute("month");
-    int day = (Integer)session.getAttribute("day");
+    Integer idx = (Integer)session.getAttribute("idx");
+    Integer year = (Integer)session.getAttribute("year");
+    Integer month = (Integer)session.getAttribute("month");
+    Integer day = (Integer)session.getAttribute("day");
 
-    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx <= 0 || String.valueOf(idx).trim().isEmpty()) {      
-        response.sendRedirect("login.jsp");
-    }
+    
+    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx ==null)
+    {
+        %>
+        <script>
+        alert("로그인 상태가 아닙니다. 서비스를 이용할려면 로그인 해 주세요.");
+        window.location.href = "login.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+        </script>
+        <%
+        }
     else{
         
         int eventYear = (request.getParameter("yearHidden")  != null) ? Integer.parseInt(request.getParameter("yearHidden")) : year;

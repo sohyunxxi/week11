@@ -18,7 +18,6 @@
 
     int event_idx=  Integer.parseInt(request.getParameter("eventIdx"));
     
-    
     Connection connect = null;
 
         Class.forName("com.mysql.jdbc.Driver");
@@ -29,7 +28,6 @@
         PreparedStatement query = connect.prepareStatement(sql);
         query.setInt(1, idx);
         query.setInt(2, event_idx);
-
 
         // query 전송
         query.executeUpdate();

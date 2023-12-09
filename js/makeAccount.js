@@ -156,8 +156,6 @@ function checkNoInput() {
     var idRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/;  // 영어와 숫자를 포함하고, 6자리 이상 12자리 이하
     var nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
 
-
-    
     if (nameInput.value.trim() === '' ||
         idInput.value.trim() === '' ||
         pwInput.value.trim() === '' ||
@@ -198,11 +196,9 @@ function validateRadioSelection(radioInputs) {
     return false;
 }
 
-
-  
-    var teamInputs = document.querySelectorAll('input[name="team"]');
-    var companyInputs = document.querySelectorAll('input[name="company"]');
-    var idDuplicationCheck = document.getElementById('idDuplicationCheck');
+var teamInputs = document.querySelectorAll('input[name="team"]');
+var companyInputs = document.querySelectorAll('input[name="company"]');
+var idDuplicationCheck = document.getElementById('idDuplicationCheck');
 
 function checkNameEvent(){
     var nameInput = document.getElementById('nameBox'); 
@@ -215,6 +211,7 @@ function checkNameEvent(){
         name.textContent = '';
     }
 }
+
 function checkIdEvent(){
     var idInput = document.getElementById('idBox');
     var idInputMessage = document.getElementById('idInputMessage');
@@ -231,7 +228,6 @@ function checkPwMatchEvent() {
     var confirmPassword = document.getElementById('confirmPwBox').value;
     var mismatchMessage = document.getElementById('passwordMismatch');
     var confirmMismatchMessage = document.getElementById('confirmPasswordMismatch');
-
 
     if (password !== confirmPassword) {
         mismatchMessage.textContent = '비밀번호가 일치하지 않습니다.';

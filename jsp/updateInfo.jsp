@@ -13,11 +13,17 @@
     String role = (String)session.getAttribute("role");
     String team =(String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
-    if (name==null){
-        response.sendRedirect("login.jsp");
-    }
-    
+    Integer idx = (Integer)session.getAttribute("idx");
+   
+    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx ==null)
+    {
+        %>
+        <script>
+        alert("로그인 상태가 아닙니다. 서비스를 이용할려면 로그인 해 주세요.");
+        window.location.href = "login.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+        </script>
+        <%
+        }
 %>
 
 <!DOCTYPE html>

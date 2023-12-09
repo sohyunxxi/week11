@@ -17,7 +17,7 @@
     String role = (String)session.getAttribute("role");
     String team =(String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
+    Integer idx = (Integer)session.getAttribute("idx");
 
     %>
 //try catch 넣기

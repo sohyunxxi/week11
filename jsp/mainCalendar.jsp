@@ -17,10 +17,10 @@
     String role = (String)session.getAttribute("role");
     String team =(String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
-    int year = (Integer)session.getAttribute("year");
-    int month = (Integer)session.getAttribute("month");
-    int day = (Integer)session.getAttribute("day");
+    Integer idx = (Integer)session.getAttribute("idx");
+    Integer year = (Integer)session.getAttribute("year");
+    Integer month = (Integer)session.getAttribute("month");
+    Integer day = (Integer)session.getAttribute("day");
 
     ArrayList<String> nameList= new ArrayList<String>();
     ArrayList<String> idList= new ArrayList<String>();
@@ -46,10 +46,17 @@
             showTeamName = sessionTeamName;
         }
   
-       
-    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx <= 0 || String.valueOf(idx).trim().isEmpty()) {      
-        response.sendRedirect("login.jsp");
-    }else{
+        if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx ==null)
+        {
+            {
+                %>
+                <script>
+                alert("로그인 상태가 아닙니다. 서비스를 이용할려면 로그인 해 주세요.");
+                window.location.href = "login.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+                </script>
+                <%
+                }
+        }else{
         Class.forName("com.mysql.jdbc.Driver");
         Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10","Sohyunxxi","1234");
         if ("팀장".equals(role)){
@@ -499,6 +506,91 @@
         var modalWindow = window.open('', '_blank', 'width=600, height=400, resizable=yes');
         // 모달 내용 생성
         var modalContent = `
+        <style>
+            #modal {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            color: #70AD47;
+            }
+            #innerDiv{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #innerModal {
+                padding: 20px;
+                background-color: white;
+                text-align: center;
+                width: 90%;
+                height: 100%;
+
+            }
+            .eventTime{
+                margin-top:10px;
+                margin-bottom:10px;
+                margin-left:15px;
+                margin-rigth:10px;
+                display:inline;
+            }
+            .eventContent{
+                margin-top:10px;
+                margin-bottom:10px;
+                margin-left:15px;
+                margin-rigth:10px;
+                display:inline;
+            }
+            .eventBox{
+                text-align : start;
+                display:flex;
+                align-items:center;
+                justify-content: space-between;
+
+            }
+            #planBox {
+                width: 100%;
+                height: 30%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                overflow: auto;
+            }
+            #planButton{
+                margin-top:30px;
+                margin-bottom:40px;
+            }
+
+            #modalTimeBox {
+                display: flex;
+                flex-direction: row;
+                justify-content:center;
+                align-items:center;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+            #planInputBox {
+                display: flex;
+                flex-direction: row;
+                justify-content:center;
+                align-items:center;
+                margin:0;
+            }
+            #insertPlan{
+                display: flex;
+                flex-direction: column;
+                justify-content:center;
+                align-items:flex-start;
+            }
+            #planText{
+                margin-left:15px;
+                width:250px;
+                height:150px;
+            }
+            #planTime{
+                margin-left:15px;
+            }
+        </style>
         <div id="modal">
             <div id="innerModal">         
                 <div id="innerDiv" ></div>
@@ -513,15 +605,17 @@
                 <form action="../action/insertPlanAction.jsp" id="insertPlanForm">
                     <h3>일정 추가</h3>
                     <hr>
-                    <div id="modalTimeBox">
-                        <span>일정 시간</span>
-                        <input type="time" id="planTime" name="planTime">
-                    </div>
-                    <div id="planInputBox">
-                        <span>일정 내용</span>
-                        <input type="text" id="planText" name="planText" placeholder = '최대 50자까지 적을 수 있습니다. '>
-                        <input type="hidden" id="hiddenDate" name="hiddenDate">
-                        <input type="hidden" id="hiddenIdx" name="hiddenIdx">
+                    <div id="insertPlan">
+                        <div id="modalTimeBox">
+                            <span>일정 시간</span>
+                            <input type="time" id="planTime" name="planTime">
+                        </div>
+                        <div id="planInputBox">
+                            <span>일정 내용</span>
+                            <input type="text" id="planText" name="planText" placeholder = '최대 50자까지 적을 수 있습니다.'>
+                            <input type="hidden" id="hiddenDate" name="hiddenDate">
+                            <input type="hidden" id="hiddenIdx" name="hiddenIdx">
+                        </div>
                     </div>
                     <button id="planButton" type="button">등록</button>
                 </form>
@@ -622,7 +716,11 @@
             
         for (var i = 0; i < matchingIndices.length; i++) {
             console.log(matchingIndices);
-            var div = document.createElement("div");                
+            var div = document.createElement("div"); 
+            var times = document.createElement("div");   
+            var contents = document.createElement("div");
+            var buttonBox = document.createElement("div");  
+            var smallPlanBox = document.createElement("div");                                                                      
             var spanContent = document.createElement("span");
             var spanContentInfo = document.createElement("span");
             var spanTime = document.createElement("span");
@@ -643,11 +741,14 @@
            
             }
             var spanTimeInfo = document.createElement("span");
-              
+            div.className="eventBox";
+            times.className="eventTime";
+            contents.className="eventContent";
+            buttonBox.className="popUpButtons";  
             spanTime.id="spanTime"+i;
             spanContent.id="spanContent"+i;
-            spanTimeInfo.innerText =  "일정시간";
-            spanContentInfo.innerText = "일정내용";
+            spanTimeInfo.innerText =  "";
+            spanContentInfo.innerText = "";
             spanTimeInfo.id =  "spanTimeInfo"+i;
             spanContentInfo.id = "spanContentInfo"+i;
             hidden.type = "hidden";
@@ -656,17 +757,22 @@
             hidden.id = "eventIdxInput"+i; 
             spanTime.innerText =  timeList[matchingIndices[i]] 
             spanContent.innerText = eventList[matchingIndices[i]];
-            div.appendChild(spanTimeInfo);
-            div.appendChild(spanTime);
-            div.appendChild(spanContentInfo);
-            div.appendChild(spanContent);
+            times.appendChild(spanTimeInfo);
+            times.appendChild(spanTime);
+            contents.appendChild(spanContentInfo);
+            contents.appendChild(spanContent);
+            smallPlanBox.appendChild(times);
+            smallPlanBox.appendChild(contents);
+            div.appendChild(smallPlanBox);
             if(showTeamIdx==0){
-                div.appendChild(updateButton);
-                div.appendChild(deleteButton);
+                buttonBox.appendChild(updateButton);
+                buttonBox.appendChild(deleteButton);
             }
             div.appendChild(hidden);
             var planBox =  modalWindow.document.getElementById("planBox");
             planBox.appendChild(div);
+            div.appendChild(buttonBox);
+
         }
         var planButton = modalWindow.document.getElementById("planButton");
         planButton.onclick = function() {checkInsertPlanEvent(modalWindow);};
@@ -689,8 +795,7 @@
         var planTime = modalWindow.document.getElementById("planTime").value;
         var hiddenIdx = modalWindow.document.getElementById("hiddenIdx");
         hiddenIdx.value = showTeamIdx;
-        // 필요한 경우 여기에 추가적인 입력값 확인을 할 수 있습니다.
-        // 조건을 만족하지 않으면 알림을 띄우고 submit을 중지
+ 
         if (!planText || !planTime) {
             alert("일정 내용과 시간을 모두 입력해주세요.");
         }
@@ -698,10 +803,11 @@
         // 모든 조건을 만족하면 form을 submit
         var form = modalWindow.document.getElementById("insertPlanForm");
         form.submit();
-        }
-        // 모든 조건을 만족하면 submit을 계속 진행
         reloadMain();
+        }
+        
     }
+
     function reloadMain(){
         window.location.reload();
 

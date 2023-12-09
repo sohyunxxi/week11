@@ -5,7 +5,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.ResultSet" %>
 <%
-    
     request.setCharacterEncoding("utf-8");
 
     ResultSet rs = null;
@@ -27,8 +26,6 @@
     String sql = "SELECT id FROM user WHERE tel=? AND name=?";
     PreparedStatement query = connect.prepareStatement(sql);
 
-
-
     if (name == null && tel == null || (name.equals("") && tel.equals(""))) {
         out.println("<p>이름과 전화번호를 입력해주세요.</p>");
     } else if (name != null && !name.matches("^[a-zA-Z가-힣]{2,50}$")) {
@@ -38,8 +35,7 @@
     } else {
         // query 전송
         query.setString(1, tel);
-        query.setString(2, name);
-        
+        query.setString(2, name);  
         rs = query.executeQuery();
         
         if (rs.next()) {
@@ -52,8 +48,6 @@
             redirectPage = "../jsp/login.jsp";
         }
     }
-    
-
 
 %>
 

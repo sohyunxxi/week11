@@ -65,8 +65,7 @@
                     session.setAttribute("team", dbteam);
                     session.setAttribute("role", dbrole);
                     session.setAttribute("userName", dbname);
-                   
-                    
+                     
                     //date 변수와 Calendar 변수의 차이
                     Calendar cal = Calendar.getInstance();
         
@@ -101,9 +100,7 @@
         
         <%
             }
-    
-        
         }
 
-        %>
+    %>
         

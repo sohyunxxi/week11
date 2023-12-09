@@ -19,8 +19,6 @@
     int month = (Integer)session.getAttribute("month");
     int day = (Integer)session.getAttribute("day");
     
-    
-
     session.removeAttribute("teamIdx");
     session.removeAttribute("teamName");
     

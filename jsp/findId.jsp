@@ -5,6 +5,26 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
 
+<%
+
+    request.setCharacterEncoding("utf-8");
+    String name = (String)session.getAttribute("userName");
+    String id = (String)session.getAttribute("userId");
+    String pw = (String)session.getAttribute("userPw");
+    String role = (String)session.getAttribute("role");
+    String team = (String)session.getAttribute("team");
+    String tel = (String)session.getAttribute("tel");
+    Integer idx = (Integer)session.getAttribute("idx");
+    if (name != null && id != null && pw != null && role != null && team != null && tel != null  && idx != null && idx > 0)
+    {
+    %>
+    <script>
+    alert("이미 로그인되어 있습니다. 일정 페이지로 이동합니다.");
+    window.location.href = "mainCalendar.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+    </script>
+    <%
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +51,13 @@
             <button id="button" type="button" onclick="searchId()">아이디 찾기</button>
         </div>
     </form>
+    <img src="../image/back.png" id="backImg" type="button" onclick="moveBackEvent()">
+
     <script src="../js/makeAccount.js"></script>
+    <script>
+        function moveBackEvent() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

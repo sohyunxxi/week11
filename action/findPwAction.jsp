@@ -17,7 +17,6 @@
     String tel = request.getParameter("tel");
     String pw = request.getParameter("pw");
 
-
     // 데이터베이스 통신 코드
 
     // Connector 파일 불러오기
@@ -29,8 +28,6 @@
     // SQL 만들기
     String sql = "SELECT pw FROM user WHERE name=? AND id=? AND tel=?";
     PreparedStatement query = connect.prepareStatement(sql);
-
-  
     
     if (name == null && tel == null && id==null || (name.equals("") && tel.equals("")&& id.equals(""))) {
         out.println("<p>이름과 아이디, 전화번호를 입력해주세요.</p>");
@@ -56,7 +53,6 @@
             message = "이름, 아이디, 전화번호가 틀렸거나 계정이 존재하지 않습니다! 다시 입력해 주세요.";
             redirectPage = "../jsp/findPw.jsp";
         }
-    
     }
 %>
 
