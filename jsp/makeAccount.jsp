@@ -9,7 +9,6 @@
     request.setCharacterEncoding("utf-8");
     String name = (String)session.getAttribute("userName");
 
-//try catch 넣기
 
     if (name != null){
         %>

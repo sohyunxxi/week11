@@ -14,23 +14,21 @@
     String role = (String)session.getAttribute("role");
     String team =(String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
+    Integer idx = (Integer)session.getAttribute("idx");
 
     int event_idx=  Integer.parseInt(request.getParameter("eventIdx"));
-    
-    Connection connect = null;
 
-        Class.forName("com.mysql.jdbc.Driver");
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/week10", "Sohyunxxi", "1234");
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10", "Sohyunxxi", "1234");
 
-        // SQL 만들기
-        String sql = "DELETE FROM event WHERE user_idx = ? AND event_idx=? ";
-        PreparedStatement query = connect.prepareStatement(sql);
-        query.setInt(1, idx);
-        query.setInt(2, event_idx);
+    // SQL 만들기
+    String sql = "DELETE FROM event WHERE user_idx = ? AND event_idx=? ";
+    PreparedStatement query = connect.prepareStatement(sql);
+    query.setInt(1, idx);
+    query.setInt(2, event_idx);
 
-        // query 전송
-        query.executeUpdate();
-        response.sendRedirect("../jsp/mainCalendar.jsp");
+    // query 전송
+    query.executeUpdate();
+    response.sendRedirect("../jsp/mainCalendar.jsp");
    
 %>

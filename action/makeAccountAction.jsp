@@ -19,7 +19,7 @@
 
     int accountSet = 0;
 
-    // 백엔드 예외처리 ->
+    // 백엔드 예외처리 -> 아이디 중복인지 확인하기.
     if   (username == null || idValue == null || pwValue == null || tel == null) {
         out.println("<p>입력값이 부족합니다.</p>");
     } else {

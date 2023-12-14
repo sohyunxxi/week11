@@ -13,7 +13,7 @@
     String role = (String)session.getAttribute("role");
     String team = (String)session.getAttribute("team");
     String tel = (String)session.getAttribute("tel");
-    int idx = (Integer)session.getAttribute("idx");
+    Integer idx = (Integer)session.getAttribute("idx");
     int teamIdx = 0;
     
     Integer sessionTeamIdx = (Integer)session.getAttribute("teamIdx");
@@ -21,11 +21,18 @@
         teamIdx = sessionTeamIdx;
     }
     
-    if (name == null) {
-        response.sendRedirect("../jsp/login.jsp");
-    }
+    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx ==null)            {
+        %>
+        <script>
+        alert("로그인 상태가 아닙니다. 서비스를 이용할려면 로그인 해 주세요.");
+        window.location.href = "../jsp/login.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+        </script>
+        <%
+        }
 
     try {
+
+        
         String eventContent = request.getParameter("planText");
         String startTime = request.getParameter("planTime");
         String startDate = request.getParameter("hiddenDate");
@@ -43,6 +50,10 @@
             query.setInt(1, idx);
         }
         else{
+            %>
+            <script>
+                alert("다른 사람의 일정을 추가할 수 없습니다.");
+            </script><%
             out.println("다른 사람의 일정을 추가할 수 없습니다.");
         }
         query.setString(2, eventContent);
@@ -60,7 +71,7 @@
         </script><%
             } 
             else {
-                out.println("Insert failed");
+                out.println("일정 입력에 실패하였습니다.다시 시도해 보세요.");
         }
     } catch (SQLException e) {
         e.printStackTrace();  // 또는 로그에 출력

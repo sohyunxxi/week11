@@ -20,17 +20,16 @@
     Integer idx = (Integer)session.getAttribute("idx");
 
     %>
-//try catch 넣기
 
-if (name != null && id != null && pw != null && role != null && team != null && tel != null  && idx != null && idx > 0)
-{
+    if (name != null && id != null && pw != null && role != null && team != null && tel != null  && idx != null && idx > 0)
+    {
 %>
-<script>
-   alert("이미 로그인되어 있습니다. 일정 페이지로 이동합니다.");
-   window.location.href = "mainCalendar.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
-</script>
+    <script>
+    alert("이미 로그인되어 있습니다. 일정 페이지로 이동합니다.");
+    window.location.href = "mainCalendar.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+    </script>
 <%
-}
+    }
 %>
 
 <!DOCTYPE html>

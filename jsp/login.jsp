@@ -46,7 +46,7 @@
                 <span>비밀번호 : </span>
                 <input id="pwBox" name="pw" type="password" length="18" maxlength="16">
             </div>
-            <input type="submit" id="button" value="로그인">
+            <input type="button" id="button" value="로그인" onclick="checkExceptionEvent()">
         </div>
     </form>
     <div id="linkBox">
@@ -72,7 +72,7 @@
         pwInput.focus();
     } else {
         // location.href="../jsp/loginAction.jsp?year=" + year + "&month=" + month + "&day=" + day;
-        location.href="../jsp/loginAction.jsp";
+        location.href="../action/loginAction.jsp?id="+idInput.value+"&pw="+pwInput.value;
     }
 } 
 </script>

@@ -12,6 +12,18 @@
     String idValue = request.getParameter("id");
     String pwValue = request.getParameter("pw");
 
+    if (idValue != null && !idValue.trim().isEmpty() && pwValue != null && !pwValue.trim().isEmpty()) {
+        
+%>
+        <h2>Login Successful!</h2>
+<%
+    } else {
+%>
+        <h2>로그인에 실패하였습니다!</h2>
+        <p>제대로 아이디와 로그인을 조건에 맞게 작성해 주세요.</p>
+<%
+    }
+
     ResultSet rs= null;
 
     //이미 로그인되어있는경우 처리하기
@@ -33,7 +45,6 @@
         <%
             response.sendRedirect("../jsp/mainCalendar.jsp");
 
-        
         }
         else{
             Class.forName("com.mysql.jdbc.Driver");

@@ -33,30 +33,30 @@
     ArrayList<Integer> monthCountList = new ArrayList<>();    
     ArrayList<Integer> eventCountList = new ArrayList<>();
 
-        int showTeamIdx = 0;
-        String showTeamName = "";
-        
-        Integer sessionTeamIdx = (Integer)session.getAttribute("teamIdx");
-        if (sessionTeamIdx != null) {
-            showTeamIdx = sessionTeamIdx;
-        }
-        
-        String sessionTeamName = (String)session.getAttribute("teamName");
-        if (sessionTeamName != null) {
-            showTeamName = sessionTeamName;
-        }
-  
-        if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx ==null)
+    int showTeamIdx = 0;
+    String showTeamName = "";
+    
+    Integer sessionTeamIdx = (Integer)session.getAttribute("teamIdx");
+    if (sessionTeamIdx != null) {
+        showTeamIdx = sessionTeamIdx;
+    }
+    
+    String sessionTeamName = (String)session.getAttribute("teamName");
+    if (sessionTeamName != null) {
+        showTeamName = sessionTeamName;
+    }
+
+    if (name == null || id == null || pw == null || role == null || team == null || tel == null || idx ==null)
+    {
         {
-            {
-                %>
-                <script>
-                alert("로그인 상태가 아닙니다. 서비스를 이용할려면 로그인 해 주세요.");
-                window.location.href = "login.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
-                </script>
-                <%
-                }
-        }else{
+            %>
+            <script>
+            alert("로그인 상태가 아닙니다. 서비스를 이용할려면 로그인 해 주세요.");
+            window.location.href = "login.jsp"; // 아이디랑 비밀번호 넘기기? idx 넘기기?
+            </script>
+            <%
+            }
+    }else{
         Class.forName("com.mysql.jdbc.Driver");
         Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10","Sohyunxxi","1234");
         if ("팀장".equals(role)){
@@ -546,6 +546,8 @@
                 display:flex;
                 align-items:center;
                 justify-content: space-between;
+                margin-top:5px;
+                margin-bottom:5px;
 
             }
             #planBox {
@@ -553,12 +555,13 @@
                 height: 30%;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
                 overflow: auto;
             }
             #planButton{
                 margin-top:30px;
                 margin-bottom:40px;
+                width:100px;
+                height:45px;
             }
 
             #modalTimeBox {

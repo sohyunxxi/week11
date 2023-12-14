@@ -16,17 +16,17 @@
     String tel = (String)session.getAttribute("tel");
     int idx = (Integer)session.getAttribute("idx");
     
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10", "Sohyunxxi", "1234");
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/week10", "Sohyunxxi", "1234");
 
-        // SQL 만들기
-        String sql = "DELETE FROM user WHERE user_idx = ?";
-        PreparedStatement query = connect.prepareStatement(sql);
-        query.setInt(1, idx); // Use setInt for an integer parameter
+    // SQL 만들기
+    String sql = "DELETE FROM user WHERE user_idx = ?";
+    PreparedStatement query = connect.prepareStatement(sql);
+    query.setInt(1, idx); // Use setInt for an integer parameter
 
-        // query 전송
-        query.executeUpdate();
-        session.invalidate(); // 세션 무효화 (로그아웃)
+    // query 전송
+    query.executeUpdate();
+    session.invalidate(); // 세션 무효화 (로그아웃)
 
 %>
 
